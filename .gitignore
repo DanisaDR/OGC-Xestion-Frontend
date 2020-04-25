@@ -10,8 +10,7 @@
 # dependencies
 /node_modules
 
-# profiling files
-chrome-profiler-events*.json
+# profiling filesgit
 speed-measure-plugin*.json
 
 # IDEs and editors
