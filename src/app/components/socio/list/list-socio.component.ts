@@ -50,11 +50,7 @@ export class ListSocioComponent implements OnInit {
 
       if (!this.page) {
         this.page = 0;
-        console.log('entro en este IF?');
       }
-
-      console.log('cuantas veces?');
-      console.log('No a lugar: ' + this.page);
 
       this.socSrv.getFilter(
         this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
@@ -77,7 +73,6 @@ export class ListSocioComponent implements OnInit {
     this.searchSocTfnoFx = '';
     this.searchSocTfnoMb = '';
     this.searchSocEmail = '';
-    this.page = 0;
     this.order = '';
     this.router.navigate([this.constSrv.socUrl + this.constSrv.page0Url]);
   }

@@ -50,16 +50,16 @@ export class ListUsuarioComponent implements OnInit {
   ngOnInit() {
     this.activRoute.paramMap.subscribe(params => {
       // tslint:disable-next-line: prefer-const
-      let page: number = +params.get(this.constSrv.pageVariable);
+      this.page = +params.get(this.constSrv.pageVariable);
 
-      if (!page) {
-        page = 0;
+      if (!this.page) {
+        this.page = 0;
       }
 
       this.usuSrv.getFilter(
         this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
         this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-        page, this.order, this.ordenationType
+        this.page, this.order, this.ordenationType
       ).subscribe(response => {
         this.paginator = response;
         this.usuarios = this.paginator.content;
@@ -92,12 +92,12 @@ export class ListUsuarioComponent implements OnInit {
     }
 
     this.activRoute.paramMap.subscribe(params => {
-      const page: number = +params.get(this.constSrv.pageVariable);
+      this.page = +params.get(this.constSrv.pageVariable);
 
       this.usuSrv.getFilter(
         this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
         this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-        page, this.order, this.ordenationType
+        this.page, this.order, this.ordenationType
       ).subscribe(
         response => {
           this.usuarios = response.content as Usuario[];
@@ -120,6 +120,14 @@ export class ListUsuarioComponent implements OnInit {
   getFind(searchUsuNom: string, searchUsuApe1: string, searchUsuApe2: string,
           searchUsuEnder: string, searchUsuTfnoFx: string, searchUsuTfnoMb: string, filtro: any) {
       this.order = filtro;
+      this.page = 0;
+
+      this.searchUsuNom = searchUsuNom;
+      this.searchUsuApe1 = searchUsuApe1;
+      this.searchUsuApe2 = searchUsuApe2;
+      this.searchUsuEnder = searchUsuEnder;
+      this.searchUsuTfnoFx = searchUsuTfnoFx;
+      this.searchUsuTfnoMb = searchUsuTfnoMb;
 
       if (this.ordenationType) {
         this.ordenationType = false;
@@ -127,25 +135,14 @@ export class ListUsuarioComponent implements OnInit {
         this.ordenationType = true;
       }
 
-      this.activRoute.paramMap.subscribe(params => {
-        const page: number = +params.get('page');
-
-        this.searchUsuNom = searchUsuNom;
-        this.searchUsuApe1 = searchUsuApe1;
-        this.searchUsuApe2 = searchUsuApe2;
-        this.searchUsuEnder = searchUsuEnder;
-        this.searchUsuTfnoFx = searchUsuTfnoFx;
-        this.searchUsuTfnoMb = searchUsuTfnoMb;
-
-        this.usuSrv.getFilter(
-          this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-          this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-          page, this.order, this.ordenationType).subscribe(response => {
-            this.usuarios = response.content as Usuario[];
-            this.paginator = response;
-          }
-        );
-      });
+      this.usuSrv.getFilter(
+        this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
+        this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
+        this.page, this.order, this.ordenationType).subscribe(response => {
+          this.usuarios = response.content as Usuario[];
+          this.paginator = response;
+        }
+      );
   }
 
   delete(usuario: Usuario): void {
