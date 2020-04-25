@@ -1,0 +1,37 @@
+<form class="mb-3 col-12 row">
+  <div class="col-lg-10 row">
+    <div class="col-lg-2">
+      <label>Nome:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="nome" [(ngModel)]="searchSocNomComp" name="searchSocNomComp" #selectSearchSocNomComp="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Enderezo:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="ender" [(ngModel)]="searchSocEnder" name="searchSocEnder" #selectSearchSocEnder="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Fixo:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="fixo" [(ngModel)]="searchSocTfnoFx" name="searchSocTfnoFx" #selectSearchSocTfnoFx="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Móbil:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="mobil" [(ngModel)]="searchSocTfnoMb" name="searchSocTfnoMb" #selectSearchSocTfnoMb="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Email:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="email" [(ngModel)]="searchSocEmail" name="searchSocEmail" #selectSearchSocEmail="ngModel">
+    </div>
+  </div>
+
+  <div class="col-lg-2 mt-4 row">
+    <div class="col-lg-6">
+      <button class="btn btn-rounded btn-light" type="reset" (click)="applyReset()">LIMPAR</button>
+    </div>
+    <div class="col-lg-6">
+      <button type="button" id="button" class="btn btn-rounded btn-light" type="reset" (click)="applyFilter()">ATOPAR</button>
+    </div>
+  </div>
+</form>

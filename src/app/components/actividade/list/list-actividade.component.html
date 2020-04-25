@@ -1,0 +1,130 @@
+<div class="mx-auto container">
+  <div class="text-primary">
+    <h5 class="text-center text-dark">LISTADO ACTIVDADES [Tamén pode xestionar o/a monitor/a e socios/as apuntados/as]</h5>
+
+    <div class="col-lg-12">
+      <div class="row mb-2 mt-2">
+        <div class="col-10">
+          <button class="btn btn-sm btn-primary mr-5" type="button"
+            title="CREAR ACTIVIDADE" [routerLink]="['/actividades/form']"
+            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR ACTIVIDADE</button>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-outline-light" type="button" data-toggle="collapse"
+            data-target="#collapseActividades" aria-expanded="true" aria-controls="#collapseActividades">
+            <img src="assets/icons/arrow-top.svg" class="mr-1">
+          </button>
+        </div>
+
+        <div class="collapse show" id="collapseActividades">
+          <div class="col-lg-12 card card-body">
+            <app-finder-actividade></app-finder-actividade>
+          </div>
+        </div>
+
+        <div class="container">
+          <table class="table table-responsive">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" (click)="getOrdenation('actID')" (click)="sortingArrows()" [routerLink]="['/actividades/paxina/0']">
+                  # ID
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('actNom')" (click)="sortingArrows()" [routerLink]="['/actividades/paxina/0']">
+                  Nome
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col">
+                  Descrición
+                </th>
+
+                <th scope="col">
+                  Data Comezo
+                </th>
+
+                <th scope="col">
+                  Data Remate
+                </th>
+
+                <th scope="col">
+                  Socios/as
+                </th>
+
+                <th scope="col">
+                  Monitor/a
+                </th>
+
+                <th scope="col" colspan="2">
+                  Aportación
+                </th>
+
+                <th *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"></th>
+                <th *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let activ of actividades" scope="row">
+                <td>{{ activ.actID }}</td>
+                <td>{{ activ.actNom }}</td>
+                <td>{{ activ.actDescr }}</td>
+                <td>{{ activ.actDataComezo }}</td>
+                <td>{{ activ.actDataRemate }}</td>
+
+                <td>
+                  <div *ngIf="activ.socios.length == 0 else modalActiv">
+                    <ul *ngFor="let soc of activ.socios" scope="row">
+                      <li>{{ soc.socNomComp }}</li>
+                    </ul>
+                  </div>
+                  <ng-template #modalActiv>
+                    <div data-target="#modalActiv" data-toggle="modal" (click)="refreshListSoc(activ.socios)"> {{ activ.socios.length }}
+                      <div class="modal fade" id="modalActiv" tabindex="-1" role="dialog" aria-labelledby="modalActivTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+
+                            <div class="modal-header">
+                              <h3 class="modal-title" id="titulo-modal">Socios/as na actividade</h3>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <ul *ngFor="let soc of activ.socios" scope="row">
+                                <li>{{ soc.socNomComp }}</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </td>
+
+                <td>{{ activ.usuario.usuNom }}<td>
+
+                <td>{{ activ.actAport }},00 € / mes</td>
+
+                <td>
+                  <a [routerLink]="['/actividades/form/', activ.actID]" class="btn btn-sm btn-warning">EDITAR</a>
+                </td>
+                <td>
+                  <a [routerLink]="['/actividades/borrar/', activ.actID]" class="btn btn-sm btn-danger">BORRAR</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <app-paginator *ngIf="paginator" [paginator]="paginator" [route]="'/actividades/paxina'"></app-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body.navbar-is-fixed-top {
+  padding-top: 120px !important;
+}
+
+body {
+  background-image: url("assets/img/rio_monelos.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+app-login .card,
+app-list-usuario .mx-auto,
+app-list-actividade .mx-auto,
+app-list-rol .mx-auto,
+app-list-socio .mx-auto {
+  background-color: white;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  min-height: 100%;
+}
+
+@media only screen and (max-device-width: 1366px) {
+  body {
+    background-attachment: scroll;
+  }
+}

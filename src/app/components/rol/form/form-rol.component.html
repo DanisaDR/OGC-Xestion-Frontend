@@ -1,0 +1,54 @@
+<div class="card container bg-light text-dark">
+  <div class="card-header text-dark">{{ createTitle }}</div>
+
+  <div class="card-body">
+    <form class="row" #rolForm="ngForm">
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group row">
+          <label for="rolDescr" class="col-form-label col-sm-3">DESCRICIÓN *</label>
+          <div class="col-sm-9">
+            <input id="rolDescr" class="form-control" name="rolDescr" placeholder="Ex: Rol para facer..."  type="text" [(ngModel)]="rol.rolDescr"
+              minlength="15" maxlength="150" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #rolDescr="ngModel" />
+
+            <div class="alert alert-danger" *ngIf="rolDescr.invalid && (rolDescr.dirty || rolDescr.touched)">
+              <div *ngIf="rolDescr?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</div>
+              <div *ngIf="rolDescr?.errors.minlength || rolDescr?.errors.maxlength">O nome debe estar entre 15 e 150</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group row">
+          <em class="text-info">Pode engadir os/as usuarios/as que terá o Rol [permite escoller varios/as]</em>
+          <label for="usuarios" class="col-form-label col-sm-3">USUARIOS/AS*</label>
+          <div class="col-sm-9">
+            <ng-select [(ngModel)]="rol.usuarios" [multiple]="true" required placerholder="escolla usuarios/as" name="usuarioSelected" bindLabel="usuario.usuNom">
+              <ng-option type="checkbox" *ngFor="let usuario of usuarios" [value]="usuario">
+                {{ usuario.usuAlias }}
+              </ng-option>
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <em class="text-info">Pode engadir os permisos para o rol [permite escoller varias]</em>
+          <label for="permisos" class="col-form-label col-sm-3">PERMISOS *</label>
+          <div class="col-sm-9">
+            <ng-select [(ngModel)]="rol.permisos" [multiple]="true" required placerholder="escolla roles" name="permisoSelected">
+              <ng-option type="checkbox" *ngFor="let permiso of permisos" [value]="permiso">
+                {{ permiso.PermisoNom }}
+              </ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row text-right">
+        <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/usuarios/paxina/0']">VOLTAR</button>
+        <button class="btn btn-sm btn-primary" role="button" (click)="update()" *ngIf="rol.rolID" [disabled]="!rolForm.form.valid">EDITAR</button>
+      </div>
+    </form>
+  </div>
+</div>
+

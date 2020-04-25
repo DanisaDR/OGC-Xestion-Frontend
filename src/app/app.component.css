@@ -1,0 +1,21 @@
+.nav-item .btn img, img.account-login {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+.btn-info {
+  background-color: #007bff;
+}
+
+.navbar-brand img {
+  transform:translateY(-3px);
+}
+
+.btn-outline-light:hover {
+  color:  #007bff;
+}

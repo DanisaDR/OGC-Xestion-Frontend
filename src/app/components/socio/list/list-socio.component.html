@@ -1,0 +1,188 @@
+<div class="mx-auto container">
+  <div class="text-primary">
+    <h5 class="text-center text-dark">LISTADO SOCIO/A [Tamén xestiona actividades e cotas pagadas por ano]</h5>
+
+    <div class="col-lg-12">
+      <div class="row mb-2 mt-2">
+        <div class="col-10">
+          <button class="btn btn-sm btn-primary mr-5" type="button"
+            title="CREAR SOCIO/A" [routerLink]="['/socios/form']"
+            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR SOCIO/A</button>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseSocios" aria-expanded="true" aria-controls="#collapseSocios">
+            <img src="assets/icons/arrow-top.svg" class="mr-1 intercambio">
+          </button>
+        </div>
+
+        <div class="collapse show" id="collapseSocios">
+          <div class="col-lg-12 card card-body">
+            <app-finder-socio></app-finder-socio>
+          </div>
+        </div>
+
+        <div class="container">
+          <table class="table table-responsive">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" (click)="getOrdenation('socID')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  # ID
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('socNomComp')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  Nome Completo
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('socEnder')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  Ender
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('socTfnoFx')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  Fixo
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('socTfnoMb')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  Móbil
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th scope="col" (click)="getOrdenation('socEmail')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
+                  Email
+                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
+                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                </th>
+
+                <th>
+                  Estado
+                </th>
+
+                <th>
+                  Actividades
+                </th>
+
+                <th>
+                  Cotas
+                </th>
+
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"></th>
+                <th *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let socio of socios" scope="row">
+                <td>{{ socio.socID }}</td>
+                <td>{{ socio.socNomComp }}</td>
+                <td>{{ socio.socEnder }}</td>
+                <td>{{ socio.socTfnoFx }}</td>
+                <td>{{ socio.socTfnoMb }}</td>
+                <td>{{ socio.socEmail }}</td>
+
+                <td>
+                  <p class="text-center" *ngIf="!socio.socAct"><img class="check-icon" src="assets/icons/circle-check.svg"/></p>
+                  <p class="text-center" *ngIf="socio.socAct"><img class="check-icon" src="assets/icons/circle-x.svg"/></p>
+                </td>
+
+                <td>
+                  <div *ngIf="socio.actividades.length == 0 else modalAct">
+                    <ul *ngFor="let act of socio.actividades" scope="row">
+                      <li>{{ act.actNom }}</li>
+                    </ul>
+                  </div>
+                  <ng-template #modalAct>
+                    <div data-target="#modalActSocio" data-toggle="modal" (click)="refreshListAct(socio.actividades)">{{ socio.actividades.length }}
+                      <div class="modal fade" id="modalActSocio" tabindex="-1" role="dialog" aria-labelledby="modalActSocioTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+
+                            <div class="modal-header">
+                              <h3 class="modal-title" id="titulo-modal">Actividades do/a socio/a</h3>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <ul *ngFor="let act of lstActSoc" scope="row">
+                                <li>{{ act.actNom }}</li>
+                              </ul>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Pechar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="socio.cotas.length == 0 else modalCotas">
+                    <ul *ngFor="let cota of socio.cotas" scope="row">
+                      <li>{{ cota.cotaAnual }}: {{ cota.cotaImporte }}</li>
+                    </ul>
+                  </div>
+                  <ng-template #modalCotas>
+                    <div data-target="#modalCotasUsuario" data-toggle="modal" (click)="refreshListCota(socio.cotas)">{{ socio.cotas.length }}
+                      <div class="modal fade" id="modalCotasUsuario" tabindex="-1" role="dialog" aria-labelledby="modalCotasUsuarioTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+
+                            <div class="modal-header">
+                              <h3 class="modal-title" id="titulo-modal">Cotas pagadas polo/a Usuario</h3>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <ul *ngFor="let cota of lstCotaSoc" scope="row">
+                                <li>{{ cota.cotaAnual }}: {{ cota.cotaImporte }} €</li>
+                              </ul>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Pechar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </td>
+
+                <td>
+                  <a [routerLink]="['/socios/form/', socio.socID]" class="btn btn-sm btn-warning">EDITAR</a>
+                </td>
+                <td>
+                  <a [routerLink]="['/socios/borrar/', socio.socID]" class="btn btn-sm btn-danger">BORRAR</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <app-paginator *ngIf="paginator" [paginator]="paginator" [route]="'/socios/paxina'"></app-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

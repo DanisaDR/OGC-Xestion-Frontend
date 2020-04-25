@@ -1,0 +1,42 @@
+<form class="mb-3 col-12 row">
+  <div class="col-lg-10 row">
+    <div class="col-lg-2">
+      <label>Nome:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="nome" [(ngModel)]="searchUsuNom" name="searchUsuNom" #selectSearchUsuNom="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Apelido 1:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="ape1" [(ngModel)]="searchUsuApe1" name="searchUsuApe1" #selectSearchUsuApe1="ngModel">
+    </div>
+    
+    <div class="col-lg-2">
+      <label>Apelido 2:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="ape2" [(ngModel)]="searchUsuApe2" name="searchUsuApe2" #selectSearchUsuApe2="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Enderezo:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="ender" [(ngModel)]="searchUsuEnder" name="searchUsuEnder" #selectSearchUsuEnder="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Tfno Fixo:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="fixo" [(ngModel)]="searchUsuTfnoFx" name="searchUsuTfnoFx" #selectSearchUsuTfnoFx="ngModel">
+    </div>
+
+    <div class="col-lg-2">
+      <label>Tfno Móbil:</label>
+      <input type="text" class="form-control col-12" value="" placeholder="mobil" [(ngModel)]="searchUsuTfnoMb" name="searchUsuTfnoMb" #selectSearchUsuTfnoMb="ngModel">
+    </div>
+  </div>
+
+  <div class="col-lg-2 mt-4 row">
+    <div class="col-lg-6">
+      <button class="btn btn-rounded btn-light" type="reset" (click)="applyReset()">LIMPAR</button>
+    </div>
+    <div class="col-lg-6">
+      <button type="button" id="button" class="btn btn-rounded btn-light" type="reset" (click)="applyFilter()" [routerLink]="['/usuarios/paxina/0']">ATOPAR</button>
+    </div>
+  </div>
+</form>

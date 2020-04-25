@@ -1,0 +1,10 @@
+.page-link .active {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color:white;
+  background-color:#007bff;
+  border: 1px solid#007bff;
+}

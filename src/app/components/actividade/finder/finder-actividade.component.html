@@ -1,0 +1,8 @@
+<form class="mb-3 row">
+  <div class="col-lg-10">
+    <label>Nome:</label>
+    <input type="text" class="form-control" value="" placeholder="nome" [(ngModel)]="searchActNom" name="searchActNom" #selectSearchActNom="ngModel">
+    <button class="btn btn-sm btn-rounded btn-info" type="reset" (click)="applyReset()">LIMPAR</button>
+    <button class="btn btn-sm btn-rounded btn-info" type="button" id="button" type="reset" (click)="applyFilter()" [routerLink]="['/actividades/paxina/0']">ATOPAR</button>
+  </div>
+</form>
