@@ -86,4 +86,14 @@ export class SocioService {
       { headers: this.httpHeaders }
     );
   }
+
+  async checkEmailSoc(email: string, socID: number): Promise<boolean> {
+    if (email === undefined || email === null) {
+      email = '';
+    }
+    return await this.http.post<boolean>(
+      this.constSrv.socValidEmail + socID + '/' + email,
+      { headers: this.httpHeaders }
+    ).toPromise();
+  }
 }

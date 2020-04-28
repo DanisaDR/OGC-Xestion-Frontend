@@ -103,7 +103,18 @@
             </div>
           </div>
         </div>
-        
+
+        <div class="form-group row">
+          <label for="socEmail" class="col-form-label col-sm-3">EMAIL</label>
+          <div class="col-sm-9">
+            <input id="socEmail" [socWithID]="socio.socID" class="form-control" existsEmail name="socEmail" placeholder="Ex: algo@algo.com" type="text" [(ngModel)]="socio.socEmail" minlength="20" maxlength="75" required #socEmail="ngModel" />
+            <div class="alert alert-danger" *ngIf="socEmail.invalid && (socEmail.dirty || socEmail.touched) || socEmail.existsEmail">
+              <div *ngIf="socEmail?.errors.minlength || socEmail?.errors.maxlength">O Email debe ter polo menos 20 caracteres ate os 75 coma max.</div>
+              <div *ngIf="socEmail?.errors.existsEmail">ERROR: Xa temos rexistrado este email. Terá que ser diferente.</div>
+            </div>
+          </div>
+        </div>
+
         <label for="socDataAlta" class="col-form-label col-sm-3">DATA ALTA</label>
         <mat-form-field class="example-full-width">
           <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerAlta" [value]= 'dateValue' placeholder="" disabled>
@@ -116,7 +127,7 @@
           <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" placeholder="Escolla data">
           <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
           <mat-datepicker #pickerBaixa></mat-datepicker>
-        </mat-form-field>   
+        </mat-form-field>
 
         <div class="form-group row">
           <em class="text-info">Pode engadir as actividades as que se pode apuntar [permite escoller varias]</em>
