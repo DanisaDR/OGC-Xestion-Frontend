@@ -38,6 +38,8 @@ import { FormRolComponent } from './components/rol/form/form-rol.component';
 import { FormSocioComponent } from './components/socio/form/form-socio.component';
 
 import { MAT_DATE_LOCALE, MatDatepickerModule, MatNativeDateModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { ValidatorMbUsuarioDirective } from './validators/validator-mb-usuario.directive';
+import { ValidatorEmailSocioDirective } from './validators/validator-email-socio.directive';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { MAT_DATE_LOCALE, MatDatepickerModule, MatNativeDateModule, MatInputModu
     FormRolComponent,
     ListSocioComponent,
     FinderSocioComponent,
-    FormSocioComponent
+    FormSocioComponent,
+    ValidatorMbUsuarioDirective,
+    ValidatorEmailSocioDirective
   ],
   imports: [
     BrowserModule,

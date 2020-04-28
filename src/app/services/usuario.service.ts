@@ -4,6 +4,7 @@ import { Usuario } from '../models/usuario';
 import { ConstantsService } from './constants.service';
 import { LoginService } from './login.service';
 import { Observable } from 'rxjs';
+import { ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,16 @@ export class UsuarioService {
     return this.http.put<boolean>(
       this.constSrv.status,
       usuario,
+      { headers: this.httpHeaders }
+    ).toPromise();
+  }
+
+  async checkMbUsu(tfnoMb: number, usuID: number): Promise<boolean> {
+    if (tfnoMb === undefined || tfnoMb === null) {
+      tfnoMb = 0;
+    }
+    return await this.http.post<boolean>(
+      this.constSrv.usuValidMb + usuID + '/' + tfnoMb,
       { headers: this.httpHeaders }
     ).toPromise();
   }

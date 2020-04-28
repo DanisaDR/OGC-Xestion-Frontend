@@ -71,11 +71,11 @@
         <div class="form-group row">
           <label for="usuTfnoMb" class="col-form-label col-sm-3">MÓBIL</label>
           <div class="col-sm-9">
-            <input id="usuTfnoMb" class="form-control" name="usuTfnoMb" type="number" placeholder="Ex: 655000500" [(ngModel)]="usuario.usuTfnoMb"
-              min="600000000" max="989999999" maxlength="600000000" minlength="9" #usuTfnoMb="ngModel" />
-
-            <div class="alert alert-danger" *ngIf="usuTfnoMb.invalid && (usuTfnoMb.dirty || usuTfnoMb.touched)">
+            <input id="usuTfnoMb" [usuWithID]="usuario.usuID" class="form-control" mbExistsUsu name="usuTfnoMb" type="number" placeholder="Ex: 655000500" [(ngModel)]="usuario.usuTfnoMb"
+              min="600000000" max="699999999" maxlength="9" minlength="9" #usuTfnoMb="ngModel" />
+            <div class="alert alert-danger" *ngIf="usuTfnoMb.invalid && (usuTfnoMb.dirty || usuTfnoMb.touched) || usuTfnoMb.mbExistsUsu">
               <div *ngIf="usuTfnoMb?.errors.minlength || usuTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</div>
+              <div *ngIf="usuTfnoMb?.errors.mbExistsUsu">O número que estás a poñer xa está rexistrado.</div>
             </div>
           </div>
         </div>
