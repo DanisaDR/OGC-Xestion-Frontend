@@ -56,7 +56,8 @@ export class ConstantsService {
 
   // Urls para cos/as socios/as
   readonly socUrl = '/socios';
-  readonly socCompleteUrl = this.hostname + this.socUrl + this.pageUrl;
+  readonly socCompleteUrl = this.hostname + this.socUrl;
+  readonly socCompletePagUrl = this.hostname + this.socUrl + this.pageUrl;
 
   // Urls para as validacións de usuarios/as
   readonly usuValidMb = this.hostname + this.userUrl + '/existe-mb/';

@@ -51,12 +51,16 @@ export class FormSocioComponent implements OnInit {
   loadSocio(): void {
     this.activRoute.params.subscribe(params => {
       const socID = params.socID;
+      console.log(socID);
 
       if (socID) {
+        console.log(socID);
         this.socSrv.getSoc(socID).subscribe(socio => {
+          console.log('1º apellido ' + this.socio.soc1Ape);
           this.socio = socio;
           this.actividades = this.socio.actividades;
         }, err => {
+          console.log(err.error);
           this.errors = err.error.errors as string[];
           this.alertSrv.errorsSwal(this.errors);
           return this.router.navigate([this.constSrv.socUrl]);

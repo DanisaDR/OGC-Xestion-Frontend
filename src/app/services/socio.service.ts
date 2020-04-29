@@ -62,7 +62,7 @@ export class SocioService {
       .append('searchSocEmail', searchSocEmail);
 
     return this.http.get(
-      this.constSrv.socCompleteUrl +
+      this.constSrv.socCompletePagUrl +
       page,
       { headers: this.httpHeaders, params: parameters }
     );
