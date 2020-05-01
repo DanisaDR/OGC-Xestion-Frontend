@@ -23,7 +23,7 @@ export class FormSocioComponent implements OnInit {
   cotas: Cota[] = [];
   actividades: Actividade[] = [];
 
-  public dateValue: Date = new Date ();
+  public dateValue: Date = new Date (0);
 
   editable: boolean;
   errors: string[];

@@ -119,15 +119,20 @@
         </div>
 
         <label for="socDataAlta" class="col-form-label col-sm-3">DATA ALTA</label>
-        <mat-form-field class="example-full-width">
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerAlta" [value]= 'dateValue' placeholder="" disabled>
-          <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
-          <mat-datepicker #pickerAlta></mat-datepicker>
-        </mat-form-field>
+          <div *ngIf="(socio.socDataAlta | date: 'dd/MM/yyyy') === (dateValue | date: 'dd/MM/yyyy') else hasDateRegister">
+            <em><b>Sen datos de Alta realizada.</b></em>
+          </div>
+          <ng-template #hasDateRegister>
+            <mat-form-field class="example-full-width">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerAlta" [ngModel]="socio.socDataAlta" [value]="socio.socDataAlta | date: 'dd/MM/yyyy'" placeholder="" disabled>
+                <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
+                <mat-datepicker #pickerAlta></mat-datepicker>
+            </mat-form-field>
+          </ng-template>
         <br/>
         <label for="socDataBaixa" class="col-form-label col-sm-3">DATA BAIXA</label>
         <mat-form-field class="example-full-width">
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" placeholder="Escolla data">
+          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" [value]="socio.socDataBaixa | date: 'dd/MM/yyyy'" placeholder="Escolla data">
           <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
           <mat-datepicker #pickerBaixa></mat-datepicker>
         </mat-form-field>
