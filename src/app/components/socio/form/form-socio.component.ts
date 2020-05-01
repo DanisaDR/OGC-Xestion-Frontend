@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SweetAlertService } from 'src/app/services/sweetalert.service';
 import { ConstantsService } from 'src/app/services/constants.service';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-socio',
@@ -96,5 +97,21 @@ export class FormSocioComponent implements OnInit {
         this.alertSrv.errorsSwal(this.errors);
       }
     );
+  }
+
+  getAllErrors(form: FormGroup | FormArray): { [key: string]: any; } | null {
+    let hasError = false;
+    const result = Object.keys(form.controls).reduce((acc, key) => {
+        const control = form.get(key);
+        const errors = (control instanceof FormGroup || control instanceof FormArray)
+            ? this.getAllErrors(control)
+            : control.errors;
+        if (errors) {
+            acc[key] = errors;
+            hasError = true;
+        }
+        return acc;
+      }, {} as { [key: string]: any; });
+    return hasError ? result : null;
   }
 }

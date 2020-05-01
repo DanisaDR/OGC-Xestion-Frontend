@@ -40,10 +40,10 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <label for="socNomComp" class="col-form-label col-sm-3">ALIAS *</label>
+        <div class="form-group row hidden">
+          <label for="socNomComp" class="col-form-label col-sm-3">NOME COMPLETO *</label>
           <div class="col-sm-9">
-            <input id="socNomComp" class="form-control" name="socNomComp" type="text" placeholder="Ex: AaaBbbCcc" [(ngModel)]="socio.socNomComp" minlength="9" maxlength="9" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socNomComp="ngModel" />
+            <input readonly id="socNomComp" class="form-control" name="socNomComp" type="text" placeholder="Ex: AaaBbbCcc" [(ngModel)]="socio.socNomComp" minlength="9" maxlength="255" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ,\s]+" #socNomComp="ngModel" />
           </div>
         </div>
 
@@ -80,14 +80,17 @@
         </div>
       </div>
 
-
       <div class="col-lg-6 col-md-6">
+        <div class="col-lg-12 col-md-12">
+          <p><em>RECORDA:<b> A lo menos, temos que ter rexistrado 1 tfno. de contacto</b></em></p>
+        </div>
         <div class="form-group row">
           <label for="socTfnoFx" class="col-form-label col-sm-3">FIXO</label>
           <div class="col-sm-9">
-            <input id="socTfnoFx" class="form-control" name="socTfnoFx" type="number" placeholder="Ex: 900000000" [(ngModel)]="socio.socTfnoFx" min="880000000" max="989999999" maxlength="9" minlength="9" #socTfnoFx="ngModel" />
+            <input id="socTfnoFx" class="form-control" name="socTfnoFx" type="text" placeholder="Ex: 900000000" [(ngModel)]="socio.socTfnoFx" maxlength="9" minlength="9" pattern="^[8|9]{1}[\d]{8}$" #socTfnoFx="ngModel" />
             <div class="alert alert-danger" *ngIf="socTfnoFx.invalid && (socTfnoFx.dirty || socTfnoFx.touched)">
-              <div *ngIf="socTfnoFx?.errors.min || socTfnoFx?.errors.max">Recorde entre 880000000 e 989999999</div>
+              <div *ngIf="socTfnoFx?.errors.pattern">Patrón non recoñecido para un fixo</div>
+              <div *ngIf="socTfnoFx?.errors.minlength || socTfnoFx?.errors.maxlength">Recorde entre 880000000 e 989999999</div>
             </div>
           </div>
         </div>
@@ -95,10 +98,9 @@
         <div class="form-group row">
           <label for="socTfnoMb" class="col-form-label col-sm-3">MÓBIL</label>
           <div class="col-sm-9">
-            <input id="socTfnoMb" class="form-control" name="socTfnoMb" type="number" placeholder="Ex: 655000500" [(ngModel)]="socio.socTfnoMb"
-              min="600000000" max="989999999" maxlength="600000000" minlength="9" #socTfnoMb="ngModel" />
-
+            <input id="socTfnoMb" class="form-control" name="socTfnoMb" type="text" placeholder="Ex: 655000500" [(ngModel)]="socio.socTfnoMb" maxlength="9" minlength="9" pattern="^[6|7]{1}[\d]{8}$" #socTfnoMb="ngModel" />
             <div class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
+              <div *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un móbil</div>
               <div *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</div>
             </div>
           </div>
@@ -107,10 +109,11 @@
         <div class="form-group row">
           <label for="socEmail" class="col-form-label col-sm-3">EMAIL</label>
           <div class="col-sm-9">
-            <input id="socEmail" [socWithID]="socio.socID" class="form-control" existsEmail name="socEmail" placeholder="Ex: algo@algo.com" type="text" [(ngModel)]="socio.socEmail" minlength="20" maxlength="75" required #socEmail="ngModel" />
+            <input id="socEmail" [socWithID]="socio.socID" class="form-control" existsEmail name="socEmail" placeholder="Ex: algo@algo.com" type="text" [(ngModel)]="socio.socEmail" minlength="20" maxlength="75" #socEmail="ngModel" />
             <div class="alert alert-danger" *ngIf="socEmail.invalid && (socEmail.dirty || socEmail.touched) || socEmail.existsEmail">
               <div *ngIf="socEmail?.errors.minlength || socEmail?.errors.maxlength">O Email debe ter polo menos 20 caracteres ate os 75 coma max.</div>
               <div *ngIf="socEmail?.errors.existsEmail">ERROR: Xa temos rexistrado este email. Terá que ser diferente.</div>
+              {{ socEmail?.errors.existsEmail }}
             </div>
           </div>
         </div>
@@ -144,11 +147,12 @@
 
       <div class="form-group row text-right">
         <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/socios/paxina/0']">VOLTAR</button>
-        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!socio.usuID else elseBlock" [disabled]="!socForm.form.valid">CREAR</button>
+        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!socio.socID else elseBlock" [disabled]="!socForm.form.valid">CREAR</button>
         <ng-template #elseBlock>
           <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!socForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
+      <pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>
     </form>
   </div>
 </div>

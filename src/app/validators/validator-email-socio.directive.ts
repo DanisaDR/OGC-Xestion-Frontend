@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { AbstractControl, ValidationErrors, NG_VALIDATORS, AsyncValidatorFn, AsyncValidator, NG_ASYNC_VALIDATORS } from '@angular/forms';
+import { AbstractControl, ValidationErrors, AsyncValidatorFn, AsyncValidator, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SocioService } from '../services/socio.service';
 
@@ -7,6 +7,7 @@ export function existsEmailSoc(socSrv: SocioService, socID: number): AsyncValida
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
     return socSrv.checkEmailSoc(control.value, socID).then(
       result => {
+        console.log(result);
         return result === true ? { existsEmail: true } : null ;
       }
     );
