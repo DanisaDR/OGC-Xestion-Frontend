@@ -7,7 +7,6 @@ export function existsEmailSoc(socSrv: SocioService, socID: number): AsyncValida
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
     return socSrv.checkEmailSoc(control.value, socID).then(
       result => {
-        console.log(result);
         return result === true ? { existsEmail: true } : null ;
       }
     );

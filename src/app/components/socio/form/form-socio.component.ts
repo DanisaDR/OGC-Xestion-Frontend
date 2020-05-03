@@ -52,13 +52,12 @@ export class FormSocioComponent implements OnInit {
   loadSocio(): void {
     this.activRoute.params.subscribe(params => {
       const socID = params.socID;
-      console.log(socID);
 
       if (socID) {
-        console.log(socID);
         this.socSrv.getSoc(socID).subscribe(socio => {
-          console.log('1º apellido ' + this.socio.soc1Ape);
           this.socio = socio;
+          this.socio.socDataAlta = new Date(socio.socDataAlta);
+          this.socio.socDataBaixa = new Date(socio.socDataBaixa);
           this.actividades = this.socio.actividades;
         }, err => {
           console.log(err.error);
@@ -88,6 +87,7 @@ export class FormSocioComponent implements OnInit {
   }
 
   update(): void {
+    console.log('paso por el update?: ' + this.socio.socDataBaixa);
     this.socSrv.update(this.socio).subscribe(
       json => {
         this.alertSrv.updateSocSwal(json.message);
