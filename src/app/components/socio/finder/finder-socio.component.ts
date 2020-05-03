@@ -42,7 +42,7 @@ export class FinderSocioComponent implements OnInit {
       this.searchSocTfnoMb = '';
     }
 
-    if (this.searchSocEmail === undefined || this.searchSocTfnoMb === null) {
+    if (this.searchSocEmail === undefined || this.searchSocEmail === null) {
       this.searchSocEmail = '';
     }
 
