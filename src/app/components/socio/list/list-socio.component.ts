@@ -44,6 +44,10 @@ export class ListSocioComponent implements OnInit {
     private loginSrv: LoginService) { }
 
   ngOnInit() {
+      this.initialLoad();
+  }
+
+  initialLoad() {
     this.activRoute.paramMap.subscribe(params => {
       // tslint:disable-next-line: prefer-const
       this.page = +params.get(this.constSrv.pageVariable);
@@ -51,7 +55,6 @@ export class ListSocioComponent implements OnInit {
       if (!this.page) {
         this.page = 0;
       }
-
       this.socSrv.getFilter(
         this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
         this.searchSocTfnoMb, this.searchSocEmail,
@@ -60,6 +63,23 @@ export class ListSocioComponent implements OnInit {
         this.paginator = response;
         this.socios = this.paginator.content;
       });
+    });
+  }
+
+  loadWithParams() {
+    this.activRoute.paramMap.subscribe(params => {
+      this.page = +params.get(this.constSrv.pageVariable);
+
+      this.socSrv.getFilter(
+        this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
+        this.searchSocTfnoMb, this.searchSocEmail,
+        this.page, this.order, this.ordenationType
+      ).subscribe(
+        response => {
+          this.socios = response.content as Socio[];
+          this.paginator = response;
+        }
+      );
     });
   }
 
@@ -76,7 +96,8 @@ export class ListSocioComponent implements OnInit {
     this.ordenationType = true;
     this.page = 0;
     this.order = 'socID';
-    this.router.navigate([this.constSrv.socUrl + this.constSrv.page0Url]);
+
+    this.initialLoad();
   }
 
   getOrdenation(filtro: any) {
@@ -88,20 +109,7 @@ export class ListSocioComponent implements OnInit {
       this.ordenationType = true;
     }
 
-    this.activRoute.paramMap.subscribe(params => {
-      this.page = +params.get(this.constSrv.pageVariable);
-
-      this.socSrv.getFilter(
-        this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
-        this.searchSocTfnoMb, this.searchSocEmail,
-        this.page, this.order, this.ordenationType
-      ).subscribe(
-        response => {
-          this.socios = response.content as Socio[];
-          this.paginator = response;
-        }
-      );
-    });
+    this.loadWithParams();
   }
 
   getSoc(socID: number) {
