@@ -73,7 +73,9 @@ export class ListSocioComponent implements OnInit {
     this.searchSocTfnoFx = '';
     this.searchSocTfnoMb = '';
     this.searchSocEmail = '';
-    this.order = '';
+    this.ordenationType = true;
+    this.page = 0;
+    this.order = 'socID';
     this.router.navigate([this.constSrv.socUrl + this.constSrv.page0Url]);
   }
 
