@@ -62,7 +62,7 @@ export class SocioService {
       .append('searchSocEmail', searchSocEmail);
 
     return this.http.get(
-      this.constSrv.socCompleteUrl +
+      this.constSrv.socCompletePagUrl +
       page,
       { headers: this.httpHeaders, params: parameters }
     );
@@ -88,11 +88,13 @@ export class SocioService {
   }
 
   async checkEmailSoc(email: string, socID: number): Promise<boolean> {
-    if (email === undefined || email === null) {
+    if (email === undefined || email === null || email === '') {
       email = '';
+    } else {
+      email = '/' + email;
     }
     return await this.http.post<boolean>(
-      this.constSrv.socValidEmail + socID + '/' + email,
+      this.constSrv.socValidEmail + socID + email,
       { headers: this.httpHeaders }
     ).toPromise();
   }

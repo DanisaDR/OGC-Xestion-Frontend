@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SweetAlertService } from 'src/app/services/sweetalert.service';
 import { ConstantsService } from 'src/app/services/constants.service';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-socio',
@@ -22,7 +23,7 @@ export class FormSocioComponent implements OnInit {
   cotas: Cota[] = [];
   actividades: Actividade[] = [];
 
-  public dateValue: Date = new Date ();
+  public dateValue: Date = new Date (0);
 
   editable: boolean;
   errors: string[];
@@ -55,8 +56,11 @@ export class FormSocioComponent implements OnInit {
       if (socID) {
         this.socSrv.getSoc(socID).subscribe(socio => {
           this.socio = socio;
+          this.socio.socDataAlta = new Date(socio.socDataAlta);
+          this.socio.socDataBaixa = new Date(socio.socDataBaixa);
           this.actividades = this.socio.actividades;
         }, err => {
+          console.log(err.error);
           this.errors = err.error.errors as string[];
           this.alertSrv.errorsSwal(this.errors);
           return this.router.navigate([this.constSrv.socUrl]);
@@ -83,6 +87,7 @@ export class FormSocioComponent implements OnInit {
   }
 
   update(): void {
+    console.log('paso por el update?: ' + this.socio.socDataBaixa);
     this.socSrv.update(this.socio).subscribe(
       json => {
         this.alertSrv.updateSocSwal(json.message);
@@ -92,5 +97,21 @@ export class FormSocioComponent implements OnInit {
         this.alertSrv.errorsSwal(this.errors);
       }
     );
+  }
+
+  getAllErrors(form: FormGroup | FormArray): { [key: string]: any; } | null {
+    let hasError = false;
+    const result = Object.keys(form.controls).reduce((acc, key) => {
+        const control = form.get(key);
+        const errors = (control instanceof FormGroup || control instanceof FormArray)
+            ? this.getAllErrors(control)
+            : control.errors;
+        if (errors) {
+            acc[key] = errors;
+            hasError = true;
+        }
+        return acc;
+      }, {} as { [key: string]: any; });
+    return hasError ? result : null;
   }
 }

@@ -44,6 +44,10 @@ export class ListSocioComponent implements OnInit {
     private loginSrv: LoginService) { }
 
   ngOnInit() {
+      this.initialLoad();
+  }
+
+  initialLoad() {
     this.activRoute.paramMap.subscribe(params => {
       // tslint:disable-next-line: prefer-const
       this.page = +params.get(this.constSrv.pageVariable);
@@ -51,7 +55,6 @@ export class ListSocioComponent implements OnInit {
       if (!this.page) {
         this.page = 0;
       }
-
       this.socSrv.getFilter(
         this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
         this.searchSocTfnoMb, this.searchSocEmail,
@@ -63,29 +66,7 @@ export class ListSocioComponent implements OnInit {
     });
   }
 
-  sortingArrows() {
-    this.visible = !this.visible;
-  }
-
-  reset() {
-    this.searchSocNomComp = '';
-    this.searchSocEnder = '';
-    this.searchSocTfnoFx = '';
-    this.searchSocTfnoMb = '';
-    this.searchSocEmail = '';
-    this.order = '';
-    this.router.navigate([this.constSrv.socUrl + this.constSrv.page0Url]);
-  }
-
-  getOrdenation(filtro: any) {
-    this.order = filtro;
-
-    if (this.ordenationType) {
-      this.ordenationType = false;
-    } else {
-      this.ordenationType = true;
-    }
-
+  loadWithParams() {
     this.activRoute.paramMap.subscribe(params => {
       this.page = +params.get(this.constSrv.pageVariable);
 
@@ -100,6 +81,35 @@ export class ListSocioComponent implements OnInit {
         }
       );
     });
+  }
+
+  sortingArrows() {
+    this.visible = !this.visible;
+  }
+
+  reset() {
+    this.searchSocNomComp = '';
+    this.searchSocEnder = '';
+    this.searchSocTfnoFx = '';
+    this.searchSocTfnoMb = '';
+    this.searchSocEmail = '';
+    this.ordenationType = true;
+    this.page = 0;
+    this.order = 'socID';
+
+    this.initialLoad();
+  }
+
+  getOrdenation(filtro: any) {
+    this.order = filtro;
+
+    if (this.ordenationType) {
+      this.ordenationType = false;
+    } else {
+      this.ordenationType = true;
+    }
+
+    this.loadWithParams();
   }
 
   getSoc(socID: number) {

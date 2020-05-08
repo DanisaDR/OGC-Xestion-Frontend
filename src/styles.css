@@ -1,23 +1,8 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
 
 body.navbar-is-fixed-top {
   padding-top: 120px !important;
-}
-
-body {
-  background-image: url("assets/img/rio_monelos.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-app-login .card,
-app-list-usuario .mx-auto,
-app-list-actividade .mx-auto,
-app-list-rol .mx-auto,
-app-list-socio .mx-auto {
-  background-color: white;
 }
 
 .pagination {

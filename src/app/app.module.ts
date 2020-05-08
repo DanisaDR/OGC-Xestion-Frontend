@@ -86,7 +86,7 @@ import { ValidatorEmailSocioDirective } from './validators/validator-email-socio
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true },
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [
     AppComponent

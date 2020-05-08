@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { AbstractControl, ValidationErrors, NG_VALIDATORS, AsyncValidatorFn, AsyncValidator, NG_ASYNC_VALIDATORS } from '@angular/forms';
+import { AbstractControl, ValidationErrors, AsyncValidatorFn, AsyncValidator, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SocioService } from '../services/socio.service';
 

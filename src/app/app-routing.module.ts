@@ -142,7 +142,7 @@ const routes: Routes = [
     data: { permisos: ['TODOS_PERMISOS'] }
   },
   {
-    path: 'socios/form/:usuID',
+    path: 'socios/form/:socID',
     component: FormSocioComponent,
     canActivate: [AuthGuard, PermisoGuard],
     data: { permisos: ['TODOS_PERMISOS'] }

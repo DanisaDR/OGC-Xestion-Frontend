@@ -3,152 +3,138 @@
 
   <div class="card-body">
     <form class="row" #socForm="ngForm">
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <label for="socNom" class="col-form-label col-sm-3">NOME *</label>
-          <div class="col-sm-9">
-            <input id="socNom" class="form-control" name="socNom" placeholder="Ex: Ana"  type="text" [(ngModel)]="socio.socNom" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socNom="ngModel" />
-            <div class="alert alert-danger" *ngIf="socNom.invalid && (socNom.dirty || socNom.touched)">
-              <div *ngIf="socNom?.errors.required">Non se olvide de cubrilo nome do/a socio/a</div>
-              <div *ngIf="socNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</div>
-              <div *ngIf="socNom?.errors.minlength || socNom?.errors.maxlength">O nome debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socApe1" class="col-form-label col-sm-3">1º APEL *</label>
-          <div class="col-sm-9">
-            <input id="socApe1" class="form-control" placeholder="Ex: Rodríguez" name="socApe1" type="text" [(ngModel)]="socio.socApe1" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socApe1="ngModel" />
-            <div class="alert alert-danger" *ngIf="socApe1.invalid && (socApe1.dirty || socApe1.touched)">
-              <div *ngIf="socApe1?.errors.required">Non se olvide de cubrilo 1º apelido do/a socio/a</div>
-              <div *ngIf="socApe1?.errors.pattern">O 1º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</div>
-              <div *ngIf="socApe1?.errors.minlength || socApe1?.errors.maxlength">O 1º apelido debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socApe2" class="col-form-label col-sm-3">2º APEL *</label>
-          <div class="col-sm-9">
-            <input id="socApe2" class="form-control" name="socApe2" type="text" placeholder="Ex: Rodríguez" [(ngModel)]="socio.socApe2" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socApe2="ngModel" />
-            <div class="alert alert-danger" *ngIf="socApe2.invalid && (socApe2.dirty || socApe2.touched)">
-              <div *ngIf="socApe2?.errors.required">Non se olvide de cubrilo 2º apelido do/a socio/a</div>
-              <div *ngIf="socApe2?.errors.pattern">O 2º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</div>
-              <div *ngIf="socApe2?.errors.minlength || socApe2?.errors.maxlength">O 2º apelido debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socNomComp" class="col-form-label col-sm-3">ALIAS *</label>
-          <div class="col-sm-9">
-            <input id="socNomComp" class="form-control" name="socNomComp" type="text" placeholder="Ex: AaaBbbCcc" [(ngModel)]="socio.socNomComp" minlength="9" maxlength="9" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socNomComp="ngModel" />
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socEnder" class="col-form-label col-sm-3">ENDER *</label>
-          <div class="col-sm-9">
-            <input id="socEnder" class="form-control" name="socEnder" placeholder="Ex: R. ALGO, 1 1L" type="text" [(ngModel)]="socio.socEnder" minlength="10" maxlength="150" required #socEnder="ngModel" />
-            <div class="alert alert-danger" *ngIf="socEnder.invalid && (socEnder.dirty || socEnder.touched)">
-              <div *ngIf="socEnder?.errors.required">Non se olvide de cubrilo o enderezo do/a socio/a</div>
-              <div *ngIf="socEnder?.errors.minlength || socEnder?.errors.maxlength">O Enderezo debe estar entre 10 e 150</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socPob" class="col-form-label col-sm-3">POBOACIÓN *</label>
-          <div class="col-sm-9">
-            <input id="socPob" class="form-control" name="socPob" placeholder="Ex: R. ALGO, 1 1L" type="text" [(ngModel)]="socio.socPob" minlength="5" maxlength="75" required #socPob="ngModel" />
-            <div class="alert alert-danger" *ngIf="socPob.invalid && (socPob.dirty || socPob.touched)">
-              <div *ngIf="socPob?.errors.required">Non se olvide de cubrila poboación do/a socio/a</div>
-              <div *ngIf="socPob?.errors.minlength || socPob?.errors.maxlength">A poboación debe estar entre 5 e 75</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socCP" class="col-form-label col-sm-3">COD. POSTAL</label>
-          <div class="col-sm-9">
-            <input id="socCP" class="form-control" name="socCP" type="number" placeholder="Ex: 15009" [(ngModel)]="socio.socCP" min="15000" max="15999" maxlength="5" minlength="5" #socCP="ngModel" />
-            <div class="alert alert-danger" *ngIf="socCP.invalid && (socCP.dirty || socCP.touched)">
-              <div *ngIf="socCP?.errors.min || socCP?.errors.max">Recorde entre 15000 e 15999</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <label for="socTfnoFx" class="col-form-label col-sm-3">FIXO</label>
-          <div class="col-sm-9">
-            <input id="socTfnoFx" class="form-control" name="socTfnoFx" type="number" placeholder="Ex: 900000000" [(ngModel)]="socio.socTfnoFx" min="880000000" max="989999999" maxlength="9" minlength="9" #socTfnoFx="ngModel" />
-            <div class="alert alert-danger" *ngIf="socTfnoFx.invalid && (socTfnoFx.dirty || socTfnoFx.touched)">
-              <div *ngIf="socTfnoFx?.errors.min || socTfnoFx?.errors.max">Recorde entre 880000000 e 989999999</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socTfnoMb" class="col-form-label col-sm-3">MÓBIL</label>
-          <div class="col-sm-9">
-            <input id="socTfnoMb" class="form-control" name="socTfnoMb" type="number" placeholder="Ex: 655000500" [(ngModel)]="socio.socTfnoMb"
-              min="600000000" max="989999999" maxlength="600000000" minlength="9" #socTfnoMb="ngModel" />
-
-            <div class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
-              <div *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="socEmail" class="col-form-label col-sm-3">EMAIL</label>
-          <div class="col-sm-9">
-            <input id="socEmail" [socWithID]="socio.socID" class="form-control" existsEmail name="socEmail" placeholder="Ex: algo@algo.com" type="text" [(ngModel)]="socio.socEmail" minlength="20" maxlength="75" required #socEmail="ngModel" />
-            <div class="alert alert-danger" *ngIf="socEmail.invalid && (socEmail.dirty || socEmail.touched) || socEmail.existsEmail">
-              <div *ngIf="socEmail?.errors.minlength || socEmail?.errors.maxlength">O Email debe ter polo menos 20 caracteres ate os 75 coma max.</div>
-              <div *ngIf="socEmail?.errors.existsEmail">ERROR: Xa temos rexistrado este email. Terá que ser diferente.</div>
-            </div>
-          </div>
-        </div>
-
-        <label for="socDataAlta" class="col-form-label col-sm-3">DATA ALTA</label>
-        <mat-form-field class="example-full-width">
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerAlta" [value]= 'dateValue' placeholder="" disabled>
-          <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
-          <mat-datepicker #pickerAlta></mat-datepicker>
-        </mat-form-field>
-        <br/>
-        <label for="socDataBaixa" class="col-form-label col-sm-3">DATA BAIXA</label>
-        <mat-form-field class="example-full-width">
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" placeholder="Escolla data">
-          <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
-          <mat-datepicker #pickerBaixa></mat-datepicker>
+      <div class="col-lg-12 col-md-12">
+        <!-- Nome Socio -->
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socNom" class="col-form-label">NOME</mat-label>
+          <input type="text" matInput name="socNom" placeholder="Ex: Ana" [(ngModel)]="socio.socNom" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socNom="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socNom.invalid && (socNom.dirty || socNom.touched)">
+            <mat-error *ngIf="socNom?.errors.required">Non se olvide de cubrilo nome do/a socio/a</mat-error>
+            <mat-error *ngIf="socNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="socNom?.errors.minlength || socNom?.errors.maxlength">O nome debe estar entre 3 e 45</mat-error>
+          </mat-error>
         </mat-form-field>
 
-        <div class="form-group row">
-          <em class="text-info">Pode engadir as actividades as que se pode apuntar [permite escoller varias]</em>
-          <label for="actividades" class="col-form-label col-sm-3">ACTIVIDADES</label>
-          <div class="col-lg-12 col-sm-12">
-            <ng-select [(ngModel)]="socio.actividades" [multiple]="true" placerholder="escolla actividades" name="actividadesSelected">
-              <ng-option type="checkbox" *ngFor="let act of actividades" [value]="act">
-                {{ act.actNom }}
-              </ng-option>
-            </ng-select>
+        <!-- Primer Apelido -->
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socApe1" class="col-form-label">1º APELIDO</mat-label>
+          <input type="text" matInput name="socApe1" placeholder="Ex: López" [(ngModel)]="socio.socApe1" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socApe1="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socApe1.invalid && (socApe1.dirty || socApe1.touched)">
+            <mat-error *ngIf="socApe1?.errors.required">Non se olvide de cubrilo 1º apelido do/a socio/a</mat-error>
+            <mat-error *ngIf="socApe1?.errors.pattern">O 1º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="socApe1?.errors.minlength || socApe1?.errors.maxlength">O 1º apelido debe estar entre 3 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socApe2" class="col-form-label">2º APELIDO</mat-label>
+          <input type="text" matInput name="socApe2" placeholder="Ex: López" [(ngModel)]="socio.socApe2" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #socApe2="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socApe2.invalid && (socApe2.dirty || socApe2.touched)">
+            <mat-error *ngIf="socApe2?.errors.required">Non se olvide de cubrilo 2º apelido do/a socio/a</mat-error>
+            <mat-error *ngIf="socApe2?.errors.pattern">O 2º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="socApe2?.errors.minlength || socApe2?.errors.maxlength">O 2º apelido debe estar entre 3 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-12 col-md-12">
+          <mat-label for="socEnder" class="col-form-label">ENDEREZO</mat-label>
+          <input type="text" matInput name="socEnder" placeholder="Ex: R. ALGO, 1 1L" [(ngModel)]="socio.socEnder" minlength="10" maxlength="150" required #socEnder="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socEnder.invalid && (socEnder.dirty || socEnder.touched)">
+            <mat-error *ngIf="socEnder?.errors.required">Non se olvide de cubrilo o enderezo do/a socio/a</mat-error>
+            <mat-error *ngIf="socEnder?.errors.minlength || socEnder?.errors.maxlength">O Enderezo debe estar entre 10 e 150</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-6 col-md-6">
+          <mat-label for="socPob" class="col-form-label">POBOACIÓN</mat-label>
+          <input type="text" matInput name="socPob" placeholder="Ex: A Coruña" [(ngModel)]="socio.socPob" minlength="5" maxlength="150" required #socPob="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socPob.invalid && (socPob.dirty || socPob.touched)">
+            <mat-error *ngIf="socPob?.errors.required">Non se olvide de cubrilo o enderezo do/a socio/a</mat-error>
+            <mat-error *ngIf="socPob?.errors.minlength || socPob?.errors.maxlength">O Enderezo debe estar entre 5 e 150</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-6 col-md-6">
+          <mat-label for="socCP" class="col-form-label">CÓDIGO POSTAL</mat-label>
+          <input type="number" matInput name="socCP" placeholder="Ex: 15009" [(ngModel)]="socio.socCP" minlength="5" maxlength="5" required #socCP="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socCP.invalid && (socCP.dirty || socCP.touched)">
+            <mat-error *ngIf="socCP?.errors.min || socCP?.errors.max">Recorde entre 15000 e 15999</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socTfnoFx" class="col-form-label">TELÉFONO FIXO</mat-label>
+          <input type="text" matInput name="socTfnoFx" placeholder="Ex: 900000000" [(ngModel)]="socio.socTfnoFx" maxlength="9" minlength="9" pattern="^[8|9]{1}[\d]{8}$" #socTfnoFx="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socTfnoFx.invalid && (socTfnoFx.dirty || socTfnoFx.touched)">
+            <mat-error *ngIf="socTfnoFx?.errors.pattern">Patrón non recoñecido para un fixo</mat-error>
+            <mat-error *ngIf="socTfnoFx?.errors.minlength || socTfnoFx?.errors.maxlength">Recorde entre 880000000 e 989999999</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
+          <input type="text" matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" maxlength="9" minlength="9" pattern="^[6|7]{1}[\d]{8}$" #socTfnoMb="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
+            <mat-error *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un fixo</mat-error>
+            <mat-error *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="socEmail" class="col-form-label">EMAIL</mat-label>
+          <input type="text" [socWithID]="socio.socID" existsEmail matInput name="socEmail" placeholder="Ex: algo@algo.com" minlength="7" maxlength="75" [(ngModel)]="socio.socEmail" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" #socEmail="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="socEmail.invalid && (socEmail.dirty || socEmail.touched)">
+            <mat-error *ngIf="socEmail?.errors.minlength || socEmail?.errors.maxlength">O Email debe ter polo menos 7 caracteres ate os 75 coma max.</mat-error>
+            <mat-error *ngIf="socEmail?.errors.pattern">Non é un patrón recoñecible para un email</mat-error>
+            <mat-error *ngIf="socEmail?.errors.existsEmail">Xa temos rexistrado este email. Terá que ser diferente.</mat-error>
+            {{ socEmail?.errors.existsEmail }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row">
+          <div class="form-group col-lg-4 col-md-4">
+            <div *ngIf="(socio.socDataAlta | date: 'dd/M/yyyy') === (dateValue | date: 'dd/M/yyyy') else hasDateRegister">
+              <em><b>Data da alta non atopada e non se pode establecer</b></em>
+            </div>
+            <ng-template #hasDateRegister>
+              <mat-form-field>
+                <input matInput [min]="minDate" [max]="maxDate" [value]="socio.socDataAlta" [matDatepicker]="pickerAlta" [(ngModel)]="socio.socDataAlta" name="socDataAlta" disabled>
+                <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
+                <mat-datepicker #pickerAlta></mat-datepicker>
+              </mat-form-field>
+            </ng-template>
+          </div>
+
+          <div class="form-group col-lg-4 col-md-4">
+            <mat-form-field>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" [value]="socio.socDataBaixa" [(ngModel)]="socio.socDataBaixa" name="socDataBaixa" placeholder="Escolla data">
+              <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
+              <mat-datepicker #pickerBaixa></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <em class="text-info">Pode engadir as actividades as que se pode apuntar [permite escoller varias]</em>
+            <label for="actividades" class="col-form-label col-sm-3">ACTIVIDADES</label>
+            <div class="col-lg-12 col-sm-12">
+              <ng-select [(ngModel)]="socio.actividades" [multiple]="true" placerholder="escolla actividades" name="actividadesSelected">
+                <ng-option type="checkbox" *ngFor="let act of actividades" [value]="act">
+                  {{ act.actNom }}
+                </ng-option>
+              </ng-select>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="form-group row text-right">
         <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/socios/paxina/0']">VOLTAR</button>
-        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!socio.usuID else elseBlock" [disabled]="!socForm.form.valid">CREAR</button>
+        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!socio.socID else elseBlock" [disabled]="!socForm.form.valid">CREAR</button>
         <ng-template #elseBlock>
           <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!socForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
+      <pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>
     </form>
   </div>
 </div>
