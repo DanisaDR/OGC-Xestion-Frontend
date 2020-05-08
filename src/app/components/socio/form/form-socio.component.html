@@ -87,7 +87,6 @@
             <mat-error *ngIf="socEmail?.errors.minlength || socEmail?.errors.maxlength">O Email debe ter polo menos 7 caracteres ate os 75 coma max.</mat-error>
             <mat-error *ngIf="socEmail?.errors.pattern">Non é un patrón recoñecible para un email</mat-error>
             <mat-error *ngIf="socEmail?.errors.existsEmail">Xa temos rexistrado este email. Terá que ser diferente.</mat-error>
-            {{ socEmail?.errors.existsEmail }}
           </mat-error>
         </mat-form-field>
 
@@ -134,7 +133,6 @@
           <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!socForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
-      <pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>
     </form>
   </div>
 </div>
