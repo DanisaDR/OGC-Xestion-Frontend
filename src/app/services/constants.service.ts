@@ -59,9 +59,10 @@ export class ConstantsService {
   readonly socCompleteUrl = this.hostname + this.socUrl;
   readonly socCompletePagUrl = this.hostname + this.socUrl + this.pageUrl;
 
-  // Urls para as validacións de usuarios/as
+  // Urls para as validacións de usuarios/as y socios/as
   readonly usuValidMb = this.hostname + this.userUrl + '/existe-mb/';
   readonly socValidEmail = this.hostname + this.socUrl + '/existe-email/';
+  readonly socValidMb = this.hostname + this.socUrl + '/existe-mb/';
 
   constructor() { }
 

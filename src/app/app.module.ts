@@ -37,9 +37,17 @@ import { FinderSocioComponent } from './components/socio/finder/finder-socio.com
 import { FormRolComponent } from './components/rol/form/form-rol.component';
 import { FormSocioComponent } from './components/socio/form/form-socio.component';
 
-import { MAT_DATE_LOCALE, MatDatepickerModule, MatNativeDateModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { MAT_DATE_LOCALE,
+  MatDatepickerModule,
+   MatNativeDateModule,
+   MatInputModule,
+   MatFormFieldModule,
+   MatCardModule
+} from '@angular/material';
+
 import { ValidatorMbUsuarioDirective } from './validators/validator-mb-usuario.directive';
 import { ValidatorEmailSocioDirective } from './validators/validator-email-socio.directive';
+import { ValidatorMbSocioDirective } from './validators/validator-mb-socio.directive';
 
 @NgModule({
   declarations: [
@@ -58,7 +66,8 @@ import { ValidatorEmailSocioDirective } from './validators/validator-email-socio
     FinderSocioComponent,
     FormSocioComponent,
     ValidatorMbUsuarioDirective,
-    ValidatorEmailSocioDirective
+    ValidatorEmailSocioDirective,
+    ValidatorMbSocioDirective
   ],
   imports: [
     BrowserModule,
@@ -72,7 +81,8 @@ import { ValidatorEmailSocioDirective } from './validators/validator-email-socio
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
   providers: [
     InicioService,

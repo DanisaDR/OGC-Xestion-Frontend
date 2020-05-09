@@ -98,4 +98,16 @@ export class SocioService {
       { headers: this.httpHeaders }
     ).toPromise();
   }
+
+  async checkMbSoc(tfnoMb: string, socID: number): Promise<boolean> {
+    if (tfnoMb === undefined || tfnoMb === null || tfnoMb === '') {
+      tfnoMb = '';
+    } else {
+      tfnoMb = '/' + tfnoMb;
+    }
+    return await this.http.post<boolean>(
+      this.constSrv.socValidMb + socID + tfnoMb,
+      { headers: this.httpHeaders }
+    ).toPromise();
+  }
 }

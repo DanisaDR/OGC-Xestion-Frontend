@@ -45,6 +45,8 @@
           </mat-error>
         </mat-form-field>
 
+        <br><br>
+
         <mat-form-field class="form-group col-lg-6 col-md-6">
           <mat-label for="socPob" class="col-form-label">POBOACIÓN</mat-label>
           <input type="text" matInput name="socPob" placeholder="Ex: A Coruña" [(ngModel)]="socio.socPob" minlength="5" maxlength="150" required #socPob="ngModel">
@@ -62,6 +64,8 @@
           </mat-error>
         </mat-form-field>
 
+        <br><br>
+
         <mat-form-field class="form-group col-lg-4 col-md-4">
           <mat-label for="socTfnoFx" class="col-form-label">TELÉFONO FIXO</mat-label>
           <input type="text" matInput name="socTfnoFx" placeholder="Ex: 900000000" [(ngModel)]="socio.socTfnoFx" maxlength="9" minlength="9" pattern="^[8|9]{1}[\d]{8}$" #socTfnoFx="ngModel">
@@ -73,10 +77,11 @@
 
         <mat-form-field class="form-group col-lg-4 col-md-4">
           <mat-label for="socTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
-          <input type="text" matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" maxlength="9" minlength="9" pattern="^[6|7]{1}[\d]{8}$" #socTfnoMb="ngModel">
+          <input type="text" [socWithID]="socio.socID" mbExists matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" maxlength="9" minlength="9" pattern="^[6|7]{1}[\d]{8}$" #socTfnoMb="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
           <mat-error class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
-            <mat-error *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un fixo</mat-error>
+            <mat-error *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un móbil</mat-error>
             <mat-error *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</mat-error>
+            <mat-error *ngIf="socTfnoMb?.errors.mbExists">Xa temos rexistrado este móbil. Mira a quen pertence e rexistra en todo caso o núm. fixo.</mat-error>
           </mat-error>
         </mat-form-field>
 
@@ -89,6 +94,8 @@
             <mat-error *ngIf="socEmail?.errors.existsEmail">Xa temos rexistrado este email. Terá que ser diferente.</mat-error>
           </mat-error>
         </mat-form-field>
+
+        <br><br>
 
         <div class="row">
           <div class="form-group col-lg-4 col-md-4">
@@ -133,6 +140,7 @@
           <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!socForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
+      <pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>
     </form>
   </div>
 </div>

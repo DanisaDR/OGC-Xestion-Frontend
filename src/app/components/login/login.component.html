@@ -1,35 +1,36 @@
-<div class="card container col-sm-4 mx-auto">
-  <div class="card-header">LOGIN ou ENTRAR</div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <form method="POST">
-          <div class="form-group">
-            <label for="usuAlias" class="col-form-label col-sm-8">Alias</label>
-            <input id="usuAlias" class="form-control" type="text" [(ngModel)]="login.usuAlias" name="usuAlias" minlength="9" maxlength="9" pattern="[a-zA-Z]{9}" placeholder="Poña o seu alias" autofocus required #usuAlias="ngModel">
-            <div class="alert alert-danger" *ngIf="usuAlias.invalid && (usuAlias.dirty || usuAlias.touched)">
-              <div *ngIf="usuAlias?.errors.required">Alias é requerido e non pode estar baleiro</div>
-              <div *ngIf="usuAlias?.errors.pattern">Alias non cumple os requirementos [9 letras]</div>
-            </div>
-          </div>
+<mat-card>
+  <mat-card-title>Login ou Entrar</mat-card-title>
+  <mat-card-content>
+    <form method="POST">
 
-          <div class="form-group">
-            <label for="usuClave" class="col-form-label col-sm-8">Contrasinal</label>
-            <button type="button" class="btn btn-sm mt" (click)="contrasinal()">
-              <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para agochar a contrasinal" title="agochar contrasinal" *ngIf="!visible">
-              <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para amosar a contrasinal" title="amosar contrasinal" *ngIf="visible">
-            </button>
-            <input id="usuClave" [type]="show ? 'text': 'password'" [(ngModel)]="login.usuClave" class="form-control" name="usuClave" placeholder="Poña a contrasinal" required #usuClave="ngModel">
-            <div class="alert alert-danger" *ngIf="usuClave.invalid && (usuClave.dirty || usuClave.touched)">
-              <div *ngIf="usuClave?.errors.required">A contrasinal é requerido e non pode estar baleira</div>
-            </div>
-          </div>
+      <mat-form-field>
+        <mat-label for="usuAlias" class="col-form-label">ALIAS</mat-label>
+        <input type="text" matInput name="usuAlias" placeholder="Ex: nomapeape" [(ngModel)]="login.usuAlias" required minlength="9" maxlength="9" pattern="[a-zA-Z]{9}" #usuAlias="ngModel">
+        <mat-error class="alert alert-danger" *ngIf="usuAlias.invalid && (usuAlias.dirty || usuAlias.touched)">
+          <mat-error *ngIf="usuAlias?.errors.required">Alias é requerido e non pode estar baleiro</mat-error>
+          <mat-error *ngIf="usuAlias?.errors.pattern">Alias non cumple os requirementos [9 letras]</mat-error>
+        </mat-error>
+      </mat-form-field>
 
-          <div class="form-group text-center">
-            <button (click)="logon()" type="submit" class="btn btn-md btn-primary mt-6" value="logon">Acceso</button>
-          </div>
-        </form>
+      <br/><br/>
+
+      <mat-form-field>
+        <mat-label for="usuClave" class="col-form-label">CLAVE</mat-label>
+        <input [type]="show ? 'text': 'password'" required type="text" matInput name="usuClave" placeholder="Ex: nomapeape" [(ngModel)]="login.usuClave" minlength="5" maxlength="50" #usuClave="ngModel">
+        <mat-error class="alert alert-danger" *ngIf="usuClave.invalid && (usuClave.dirty || usuClave.touched)">
+          <mat-error *ngIf="usuClave?.errors.required">A contrasinal é requerido e non pode estar baleira</mat-error>
+        </mat-error>
+        <button type="button" class="btn btn-sm mt" (click)="contrasinal()">
+          <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para agochar a contrasinal" title="agochar contrasinal" *ngIf="!visible">
+          <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para amosar a contrasinal" title="amosar contrasinal" *ngIf="visible">
+        </button>
+      </mat-form-field>
+
+      <br/><br/>
+
+      <div class="form-group text-center">
+        <button (click)="logon()" type="submit" class="btn btn-md btn-primary mt-6" value="logon">Acceso</button>
       </div>
-    </div>
-  </div>
-</div>
+    </form>
+  </mat-card-content>
+</mat-card>
