@@ -1,37 +1,35 @@
-<form class="mb-3 col-12 row">
-  <div class="col-lg-10 row">
-    <div class="col-lg-2">
-      <label>Nome:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="nome" [(ngModel)]="searchSocNomComp" name="searchSocNomComp" #selectSearchSocNomComp="ngModel">
-    </div>
+<form class="mb-3 row">
+  <div class="col-lg-12 col-md-12">
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchSocNomComp" class="col-form-label">NOME COMPLETO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: López López, Carlos ou López, Carlos ou Carlos" [(ngModel)]="searchSocNomComp" name="searchSocNomComp" #selectSearchSocNomComp="ngModel">
+    </mat-form-field>
 
-    <div class="col-lg-2">
-      <label>Enderezo:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="ender" [(ngModel)]="searchSocEnder" name="searchSocEnder" #selectSearchSocEnder="ngModel">
-    </div>
-
-    <div class="col-lg-2">
-      <label>Fixo:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="fixo" [(ngModel)]="searchSocTfnoFx" name="searchSocTfnoFx" #selectSearchSocTfnoFx="ngModel">
-    </div>
-
-    <div class="col-lg-2">
-      <label>Móbil:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="mobil" [(ngModel)]="searchSocTfnoMb" name="searchSocTfnoMb" #selectSearchSocTfnoMb="ngModel">
-    </div>
-
-    <div class="col-lg-2">
-      <label>Email:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="email" [(ngModel)]="searchSocEmail" name="searchSocEmail" #selectSearchSocEmail="ngModel">
-    </div>
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchSocEnder" class="col-form-label">ENDEREZO</mat-label>
+      <input type="text" matInput value="" placeholder="ex: R. Algo, 1" [(ngModel)]="searchSocEnder" name="searchSocEnder" #selectSearchSocEnder="ngModel">
+    </mat-form-field>
   </div>
 
-  <div class="col-lg-2 mt-4 row">
-    <div class="col-lg-6">
-      <button class="btn btn-rounded btn-light" type="submit" (click)="applyReset()">LIMPAR</button>
-    </div>
-    <div class="col-lg-6">
-      <button type="button" id="button" class="btn btn-rounded btn-light" type="submit" (click)="applyFilter()">ATOPAR</button>
-    </div>
+  <div class="col-lg-12 col-md-12">
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchSocTfnoFx" class="col-form-label">TELÉFONO FIXO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: 900000000" [(ngModel)]="searchSocTfnoFx" name="searchSocTfnoFx" #selectSearchSocTfnoFx="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchSocTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: 600000000" [(ngModel)]="searchSocTfnoMb" name="searchSocTfnoMb" #selectSearchSocTfnoMb="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchSocEmail" class="col-form-label">EMAIL</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: algo@algo.com" [(ngModel)]="searchSocEmail" name="searchSocEmail" #selectsearchSocEmail="ngModel">
+    </mat-form-field>
+  </div>
+
+  <div class="col-lg-12 col-md-12">
+    <button mat-raised-button color="primary" type="submit" (click)="applyReset()">LIMPAR</button> &nbsp;
+    <button mat-raised-button color="primary" type="button" id="button" type="submit" (click)="applyFilter()">ATOPAR</button>
   </div>
 </form>

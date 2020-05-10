@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { allIcons } from 'ngx-bootstrap-icons';
 
 import { AppComponent } from './app.component';
 import { LoginService } from './services/login.service';
@@ -42,7 +44,9 @@ import { MAT_DATE_LOCALE,
    MatNativeDateModule,
    MatInputModule,
    MatFormFieldModule,
-   MatCardModule
+   MatCardModule,
+   MatExpansionModule,
+   MatButtonModule
 } from '@angular/material';
 
 import { ValidatorMbUsuarioDirective } from './validators/validator-mb-usuario.directive';
@@ -82,7 +86,10 @@ import { ValidatorMbSocioDirective } from './validators/validator-mb-socio.direc
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    NgxBootstrapIconsModule.pick(allIcons),
+    MatButtonModule
   ],
   providers: [
     InicioService,
