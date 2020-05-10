@@ -48,6 +48,10 @@ export class ListUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initialLoad();
+  }
+
+  initialLoad() {
     this.activRoute.paramMap.subscribe(params => {
       // tslint:disable-next-line: prefer-const
       this.page = +params.get(this.constSrv.pageVariable);
@@ -67,30 +71,7 @@ export class ListUsuarioComponent implements OnInit {
     });
   }
 
-  sortingArrows() {
-    this.visible = !this.visible;
-  }
-
-  reset() {
-    this.searchUsuNom = '';
-    this.searchUsuApe1 = '';
-    this.searchUsuApe2 = '';
-    this.searchUsuEnder = '';
-    this.searchUsuTfnoFx = '';
-    this.searchUsuTfnoMb = '';
-    this.order = '';
-    this.router.navigate([this.constSrv.userUrl + this.constSrv.page0Url]);
-  }
-
-  getOrdenation(filtro: any) {
-    this.order = filtro;
-
-    if (this.ordenationType) {
-      this.ordenationType = false;
-    } else {
-      this.ordenationType = true;
-    }
-
+  loadWithParams() {
     this.activRoute.paramMap.subscribe(params => {
       this.page = +params.get(this.constSrv.pageVariable);
 
@@ -105,6 +86,36 @@ export class ListUsuarioComponent implements OnInit {
         }
       );
     });
+  }
+
+  sortingArrows() {
+    this.visible = !this.visible;
+  }
+
+  reset() {
+    this.searchUsuNom = '';
+    this.searchUsuApe1 = '';
+    this.searchUsuApe2 = '';
+    this.searchUsuEnder = '';
+    this.searchUsuTfnoFx = '';
+    this.searchUsuTfnoMb = '';
+    this.ordenationType = true;
+    this.page = 0;
+    this.order = 'usuID';
+
+    this.initialLoad();
+  }
+
+  getOrdenation(filtro: any) {
+    this.order = filtro;
+
+    if (this.ordenationType) {
+      this.ordenationType = false;
+    } else {
+      this.ordenationType = true;
+    }
+
+    this.loadWithParams();
   }
 
   getUser(usuID: number) {

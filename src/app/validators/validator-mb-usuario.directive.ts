@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { NG_VALIDATORS, AbstractControl, ValidationErrors, AsyncValidator, AsyncValidatorFn, NG_ASYNC_VALIDATORS } from '@angular/forms';
+import { AbstractControl, ValidationErrors, AsyncValidator, AsyncValidatorFn, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Observable } from 'rxjs';
 

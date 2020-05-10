@@ -1,42 +1,43 @@
-<form class="mb-3 col-12 row">
-  <div class="col-lg-10 row">
-    <div class="col-lg-2">
-      <label>Nome:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="nome" [(ngModel)]="searchUsuNom" name="searchUsuNom" #selectSearchUsuNom="ngModel">
-    </div>
+<form class="mb-3 row">
+  <div class="col-lg-12 col-md-12">
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchUsuNom" class="col-form-label">NOME</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: Carlos" [(ngModel)]="searchUsuNom" name="searchUsuNom" #selectSearchUsuNom="ngModel">
+    </mat-form-field>
 
-    <div class="col-lg-2">
-      <label>Apelido 1:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="ape1" [(ngModel)]="searchUsuApe1" name="searchUsuApe1" #selectSearchUsuApe1="ngModel">
-    </div>
-    
-    <div class="col-lg-2">
-      <label>Apelido 2:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="ape2" [(ngModel)]="searchUsuApe2" name="searchUsuApe2" #selectSearchUsuApe2="ngModel">
-    </div>
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchUsuApe1" class="col-form-label">PRIMER APELIDO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: López" [(ngModel)]="searchUsuApe1" name="searchUsuApe1" #selectSearchUsuApe1="ngModel">
+    </mat-form-field>
 
-    <div class="col-lg-2">
-      <label>Enderezo:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="ender" [(ngModel)]="searchUsuEnder" name="searchUsuEnder" #selectSearchUsuEnder="ngModel">
-    </div>
-
-    <div class="col-lg-2">
-      <label>Tfno Fixo:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="fixo" [(ngModel)]="searchUsuTfnoFx" name="searchUsuTfnoFx" #selectSearchUsuTfnoFx="ngModel">
-    </div>
-
-    <div class="col-lg-2">
-      <label>Tfno Móbil:</label>
-      <input type="text" class="form-control col-12" value="" placeholder="mobil" [(ngModel)]="searchUsuTfnoMb" name="searchUsuTfnoMb" #selectSearchUsuTfnoMb="ngModel">
-    </div>
+    <mat-form-field class="form-group col-lg-4 col-md-4">
+      <mat-label for="searchUsuApe2" class="col-form-label">SEGUNDO APELIDO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: López" [(ngModel)]="searchUsuApe2" name="searchUsuApe2" #selectSearchUsuApe2="ngModel">
+    </mat-form-field>
   </div>
 
-  <div class="col-lg-2 mt-4 row">
-    <div class="col-lg-6">
-      <button class="btn btn-rounded btn-light" type="reset" (click)="applyReset()">LIMPAR</button>
-    </div>
-    <div class="col-lg-6">
-      <button type="button" id="button" class="btn btn-rounded btn-light" type="reset" (click)="applyFilter()" [routerLink]="['/usuarios/paxina/0']">ATOPAR</button>
-    </div>
+  <div class="col-lg-12 col-md-12">
+    <mat-form-field class="form-group col-lg-12 col-md-12">
+      <mat-label for="searchUsuEnder" class="col-form-label">ENDEREZO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: R. Algo, 1" [(ngModel)]="searchUsuEnder" name="searchUsuEnder" #selectSearchUsuEnder="ngModel">
+    </mat-form-field>
+  </div>
+
+
+  <div class="col-lg-12 col-md-12">
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchUsuTfnoFx" class="col-form-label">TELÉFONO FIXO</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: 900000000" [(ngModel)]="searchUsuTfnoFx" name="searchUsuTfnoFx" #selectSearchUsuTfnoFx="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchUsuTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: 600000000" [(ngModel)]="searchUsuTfnoMb" name="searchUsuTfnoMb" #selectSearchUsuTfnoMb="ngModel">
+    </mat-form-field>
+  </div>
+
+  <div class="col-lg-12 col-md-12">
+    <button mat-raised-button color="primary" type="submit" (click)="applyReset()">LIMPAR</button> &nbsp;
+    <button mat-raised-button color="primary" type="button" id="button" type="submit" (click)="applyFilter()">ATOPAR</button>
   </div>
 </form>

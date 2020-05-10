@@ -36,8 +36,8 @@
 
                 <th scope="col" (click)="getOrdenation('socNomComp')" (click)="sortingArrows()" [routerLink]="['/socios/paxina/0']">
                   Nome Completo
-                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
-                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                  <i-bs class="ordeacion" name="chevron-up" *ngIf="!this.visible"></i-bs>
+                  <i-bs class="ordeacion" name="chevron-down" *ngIf="this.visible"></i-bs>
                 </th>
 
                 <th>

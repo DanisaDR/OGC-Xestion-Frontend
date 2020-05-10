@@ -3,101 +3,87 @@
 
   <div class="card-body">
     <form class="row" #usuForm="ngForm">
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <label for="usuNom" class="col-form-label col-sm-3">NOME *</label>
-          <div class="col-sm-9">
-            <input id="usuNom" class="form-control" name="usuNom" placeholder="Ex: Ana"  type="text" [(ngModel)]="usuario.usuNom" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuNom="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuNom.invalid && (usuNom.dirty || usuNom.touched)">
-              <div *ngIf="usuNom?.errors.required">Non se olvide de cubrilo nome do/a usuario/a</div>
-              <div *ngIf="usuNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</div>
-              <div *ngIf="usuNom?.errors.minlength || usuNom?.errors.maxlength">O nome debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
+      <div class="col-lg-12 col-md-12">
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="usuNom" class="col-form-label">NOME</mat-label>
+          <input type="text" matInput name="usuNom" placeholder="Ex: Ana" [(ngModel)]="usuario.usuNom" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuNom="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="usuNom.invalid && (usuNom.dirty || usuNom.touched)">
+            <mat-error *ngIf="usuNom?.errors.required">Non se olvide de cubrilo nome do/a usuario/a</mat-error>
+            <mat-error *ngIf="usuNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="usuNom?.errors.minlength || usuNom?.errors.maxlength">O nome debe estar entre 3 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group row">
-          <label for="usuApe1" class="col-form-label col-sm-3">1º APEL *</label>
-          <div class="col-sm-9">
-            <input id="usuApe1" class="form-control" placeholder="Ex: Rodríguez" name="usuApe1" type="text" [(ngModel)]="usuario.usuApe1" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuApe1="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuApe1.invalid && (usuApe1.dirty || usuApe1.touched)">
-              <div *ngIf="usuApe1?.errors.required">Non se olvide de cubrilo 1º apelido do/a usuario/a</div>
-              <div *ngIf="usuApe1?.errors.pattern">O 1º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</div>
-              <div *ngIf="usuApe1?.errors.minlength || usuApe1?.errors.maxlength">O 1º apelido debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="usuApe1" class="col-form-label">1º APELIDO</mat-label>
+          <input type="text" matInput name="usuApe1" placeholder="Ex: López" [(ngModel)]="usuario.usuApe1" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuApe1="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="usuApe1.invalid && (usuApe1.dirty || usuApe1.touched)">
+            <mat-error *ngIf="usuApe1?.errors.required">Non se olvide de cubrilo 1º apelido do/a usuario/a</mat-error>
+            <mat-error *ngIf="usuApe1?.errors.pattern">O 1º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="usuApe1?.errors.minlength || usuApe1?.errors.maxlength">O 1º apelido debe estar entre 3 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group row">
-          <label for="usuApe2" class="col-form-label col-sm-3">2º APEL *</label>
-          <div class="col-sm-9">
-            <input id="usuApe2" class="form-control" name="usuApe2" type="text" placeholder="Ex: Rodríguez" [(ngModel)]="usuario.usuApe2" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuApe2="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuApe2.invalid && (usuApe2.dirty || usuApe2.touched)">
-              <div *ngIf="usuApe2?.errors.required">Non se olvide de cubrilo 2º apelido do/a usuario/a</div>
-              <div *ngIf="usuApe2?.errors.pattern">O 2º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</div>
-              <div *ngIf="usuApe2?.errors.minlength || usuApe2?.errors.maxlength">O 2º apelido debe estar entre 3 e 45</div>
-            </div>
-          </div>
-        </div>
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="usuApe2" class="col-form-label">2º APELIDO</mat-label>
+          <input type="text" matInput name="usuApe2" placeholder="Ex: López" [(ngModel)]="usuario.usuApe2" minlength="3" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuApe2="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="usuApe2.invalid && (usuApe2.dirty || usuApe2.touched)">
+            <mat-error *ngIf="usuApe2?.errors.required">Non se olvide de cubrilo 2º apelido do/a usuario/a</mat-error>
+            <mat-error *ngIf="usuApe2?.errors.pattern">O 2º apelido soamente pode levar carácteres, no caso de número, cubra co i mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="usuApe2?.errors.minlength || usuApe2?.errors.maxlength">O 2º apelido debe estar entre 3 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group row">
-          <label for="usuAlias" class="col-form-label col-sm-3">ALIAS *</label>
-          <div class="col-sm-9">
-            <input id="usuAlias" class="form-control" name="usuAlias" type="text" placeholder="Ex: AaaBbbCcc" [(ngModel)]="usuario.usuAlias" minlength="9" maxlength="9" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #usuAlias="ngModel" />
-          </div>
-        </div>
+        <br><br>
 
-        <div class="form-group row">
-          <label for="usuEnder" class="col-form-label col-sm-3">ENDER *</label>
-          <div class="col-sm-9">
-            <input id="usuEnder" class="form-control" name="usuEnder" placeholder="Ex: R. ALGO, 1 1L" type="text" [(ngModel)]="usuario.usuEnder" minlength="10" maxlength="150" required #usuEnder="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuEnder.invalid && (usuEnder.dirty || usuEnder.touched)">
-              <div *ngIf="usuEnder?.errors.required">Non se olvide de cubrilo o enderezo do/a usuario/a</div>
-              <div *ngIf="usuEnder?.errors.minlength || usuEnder?.errors.maxlength">O Enderezo debe estar entre 10 e 150</div>
-            </div>
-          </div>
-        </div>
+        <mat-form-field class="form-group col-lg-12 col-md-12">
+          <mat-label for="usuEnder" class="col-form-label">ENDEREZO</mat-label>
+          <input type="text" matInput name="usuEnder" placeholder="Ex: R. ALGO, 1 1L" [(ngModel)]="usuario.usuEnder" minlength="10" maxlength="150" required #usuEnder="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="usuEnder.invalid && (usuEnder.dirty || usuEnder.touched)">
+            <mat-error *ngIf="usuEnder?.errors.required">Non se olvide de cubrilo o enderezo do/a usuario/a</mat-error>
+            <mat-error *ngIf="usuEnder?.errors.minlength || usuEnder?.errors.maxlength">O Enderezo debe estar entre 10 e 150</mat-error>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group row">
-          <label for="usuTfnoFx" class="col-form-label col-sm-3">FIXO</label>
-          <div class="col-sm-9">
-            <input id="usuTfnoFx" class="form-control" name="usuTfnoFx" type="number" placeholder="Ex: 900000000" [(ngModel)]="usuario.usuTfnoFx" min="880000000" max="989999999" maxlength="9" minlength="9" #usuTfnoFx="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuTfnoFx.invalid && (usuTfnoFx.dirty || usuTfnoFx.touched)">
-              <div *ngIf="usuTfnoFx?.errors.min || usuTfnoFx?.errors.max">Recorde entre 880000000 e 989999999</div>
-            </div>
-          </div>
-        </div>
+        <br><br>
 
-        <div class="form-group row">
-          <label for="usuTfnoMb" class="col-form-label col-sm-3">MÓBIL</label>
-          <div class="col-sm-9">
-            <input id="usuTfnoMb" [usuWithID]="usuario.usuID" class="form-control" mbExistsUsu name="usuTfnoMb" type="number" placeholder="Ex: 655000500" [(ngModel)]="usuario.usuTfnoMb"
-              min="600000000" max="699999999" maxlength="9" minlength="9" #usuTfnoMb="ngModel" />
-            <div class="alert alert-danger" *ngIf="usuTfnoMb.invalid && (usuTfnoMb.dirty || usuTfnoMb.touched) || usuTfnoMb.mbExistsUsu">
-              <div *ngIf="usuTfnoMb?.errors.minlength || usuTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</div>
-              <div *ngIf="usuTfnoMb?.errors.mbExistsUsu">O número que estás a poñer xa está rexistrado.</div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <mat-form-field class="form-group col-lg-6 col-md-6">
+          <mat-label for="usuTfnoFx" class="col-form-label">TELÉFONO FIXO</mat-label>
+          <input type="text" matInput name="usuTfnoFx" placeholder="Ex: 900000000" [(ngModel)]="usuario.usuTfnoFx" maxlength="9" minlength="9" pattern="^[8|9]{1}[\d]{8}$" #usuTfnoFx="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="usuTfnoFx.invalid && (usuTfnoFx.dirty || usuTfnoFx.touched)">
+            <mat-error *ngIf="usuTfnoFx?.errors.pattern">Patrón non recoñecido para un fixo</mat-error>
+            <mat-error *ngIf="usuTfnoFx?.errors.minlength || usuTfnoFx?.errors.maxlength">Recorde entre 880000000 e 989999999</mat-error>
+          </mat-error>
+        </mat-form-field>
 
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <em class="text-info">Pode engadir os roles que terá dentro do aplicativo [permite escoller varios]</em>
-          <label for="rol" class="col-form-label col-sm-3">ROLES *</label>
-          <div class="col-sm-12">
-            <ng-select [(ngModel)]="usuario.roles" [multiple]="true" required placerholder="escolla roles" name="rolesSelected">
+        <mat-form-field class="form-group col-lg-6 col-md-6">
+          <mat-label for="usuTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
+          <input type="text" [usuWithID]="usuario.usuID" mbExistsUsu matInput name="usuTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="usuario.usuTfnoMb" maxlength="9" minlength="9" pattern="^[6|7]{1}[\d]{8}$" #usuTfnoMb="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+          <mat-error class="alert alert-danger" *ngIf="usuTfnoMb.invalid && (usuTfnoMb.dirty || usuTfnoMb.touched)">
+            <mat-error *ngIf="usuTfnoMb?.errors.pattern">Patrón non recoñecido para un móbil</mat-error>
+            <mat-error *ngIf="usuTfnoMb?.errors.minlength || usuTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</mat-error>
+            <mat-error *ngIf="usuTfnoMb?.errors.mbExistsUsu">Xa temos rexistrado este móbil. Mira a quen pertence e rexistra en todo caso o núm. fixo.</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <br><br>
+
+        <div class="row">
+          <div class="form-group col-lg-6 col-md-6">
+            <em class="text-info">Pode engadir o/s rol/es que terá dentro do aplicativo</em>
+            <br/>
+            <label for="rol" class="col-form-label">ROLES</label>
+            <ng-select [(ngModel)]="usuario.roles" required [multiple]="true" required placerholder="escolla roles" name="rolesSelected">
               <ng-option type="checkbox" *ngFor="let rol of roles" [value]="rol">
                 {{ rol.rolNome }}
               </ng-option>
             </ng-select>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <em class="text-info">Pode engadir as actividades onde vai a ser monitor/a [permite escoller varias]</em>
-          <label for="rol" class="col-form-label col-sm-3">ACTIVIDADES</label>
-          <div class="col-lg-12 col-sm-12">
+          <div class="form-group col-lg-6 col-md-6">
+            <em class="text-info">Pode engadir a/s actividad/es onde vai a ser monitor/a</em>
+            <br/>
+            <label for="rol" class="col-form-label">ACTIVIDADES</label>
             <ng-select [(ngModel)]="usuario.actividades" [multiple]="true" placerholder="escolla actividades" name="actividadeSelected">
               <ng-option type="checkbox" *ngFor="let act of actividades" [value]="act">
                 {{ act.actNom }}
@@ -108,10 +94,10 @@
       </div>
 
       <div class="form-group row text-right">
-        <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/usuarios/paxina/0']">VOLTAR</button>
-        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!usuario.usuID else elseBlock" [disabled]="!usuForm.form.valid">CREAR</button>
+        <button mat-raised-button color="primary" role="button" [routerLink]="['/usuarios/paxina/0']">VOLTAR</button>
+        <button mat-raised-button color="primary" role="button" (click)="create()" *ngIf="!usuario.usuID else elseBlock" [disabled]="!usuForm.form.valid">CREAR</button>
         <ng-template #elseBlock>
-          <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!usuForm.form.valid">EDITAR</button>
+          <button mat-raised-button color="primary" role="button" (click)="update()" [disabled]="!usuForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
     </form>

@@ -10,8 +10,8 @@ export class Socio {
   socEnder: string;
   socPob: string;
   socCP: number;
-  socTfnoFx: number;
-  socTfnoMb: number;
+  socTfnoFx: string;
+  socTfnoMb: string;
   socAct: boolean;
   socDataAlta: Date;
   socDataBaixa: Date;
