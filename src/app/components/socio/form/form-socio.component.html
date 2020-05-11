@@ -77,7 +77,7 @@
 
         <mat-form-field class="form-group col-lg-4 col-md-4">
           <mat-label for="socTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
-          <input type="text" [socWithID]="socio.socID" mbExistsSoc matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" maxlength="9" pattern="^[0-9]$" #socTfnoMb="ngModel">
+          <input type="text" [socWithID]="socio.socID" mbExistsSoc matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" minlength="9" maxlength="9" pattern="^[0-9]$" #socTfnoMb="ngModel">
           <mat-error class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
             <mat-error *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un móbil</mat-error>
             <mat-error *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</mat-error>

@@ -52,15 +52,11 @@
                   <i-bs class="ordeacion" name="chevron-down" *ngIf="this.visible"></i-bs>
                 </th>
 
-                <th>
-                  Estado
-                </th>
-
-                <th>
+                <th class="text-center">
                   Roles
                 </th>
 
-                <th>
+                <th class="text-center">
                   Monitor/a
                 </th>
 
@@ -82,12 +78,7 @@
                 <td>{{ usuario.usuApe1 }}</td>
                 <td>{{ usuario.usuApe2 }}</td>
 
-                <td>
-                  <img class="check-icon" src="assets/icons/circle-check.svg"/>
-                  <img class="check-icon" src="assets/icons/circle-x.svg"/>
-                </td>
-
-                <td>
+                <td class="text-center">
                   <div *ngIf="usuario.roles.length == 0 else modalRoles">
                     <ul *ngFor="let rol of usuario.roles" scope="row">
                       <li>{{ rol.rolNome }}</li>
@@ -122,7 +113,7 @@
                   </ng-template>
                 </td>
 
-                <td>
+                <td class="text-center">
                   <div *ngIf="usuario.actividades.length == 0 else modalAct">
                     <ul *ngFor="let act of usuario.actividades" scope="row">
                       <li>{{ act.actNom }}</li>
