@@ -1,8 +1,0 @@
-input, .ng-select-multiple {
-    border: 1px solid black;
-}
-
-.ng-select-multiple {
-    display: block;
-    box-sizing: border-box;
-}

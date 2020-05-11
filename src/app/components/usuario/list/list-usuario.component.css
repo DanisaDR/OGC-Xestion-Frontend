@@ -1,4 +1,23 @@
-img.check-icon, img.intercambio {
-  width: 16px;
-  height: 16px;
+i-bs.vermello {
+  color: red !important;
+}
+
+i-bs.verde {
+  color: green !important;
+}
+
+i-bs.estados {
+  font-size: x-large;
+}
+
+i-bs.ordeacion {
+  font-size: x-small;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+table {
+  margin: 0px auto;
 }

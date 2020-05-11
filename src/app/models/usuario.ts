@@ -9,8 +9,8 @@ export class Usuario {
   usu1Ape: string;
   usu2Ape: string;
   usuEnder: string;
-  usuTfnoFx: number;
-  usuTfnoMb: number;
+  usuTfnoFx: string;
+  usuTfnoMb: string;
   usuAlias: string;
   usuClave: string;
 

@@ -107,12 +107,14 @@ export class UsuarioService {
     ).toPromise();
   }
 
-  async checkMbUsu(tfnoMb: number, usuID: number): Promise<boolean> {
-    if (tfnoMb === undefined || tfnoMb === null) {
-      tfnoMb = 0;
+  async checkMbUsu(tfnoMb: string, usuID: number): Promise<boolean> {
+    if (tfnoMb === undefined || tfnoMb === null || tfnoMb === '') {
+      tfnoMb = '';
+    } else {
+      tfnoMb = '/' + tfnoMb;
     }
     return await this.http.post<boolean>(
-      this.constSrv.usuValidMb + usuID + '/' + tfnoMb,
+      this.constSrv.usuValidMb + usuID + tfnoMb,
       { headers: this.httpHeaders }
     ).toPromise();
   }

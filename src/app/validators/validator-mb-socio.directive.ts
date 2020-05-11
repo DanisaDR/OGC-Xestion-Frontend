@@ -7,7 +7,7 @@ export function existsMbSoc(socSrv: SocioService, socID: number): AsyncValidator
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
     return socSrv.checkMbSoc(control.value, socID).then(
       result => {
-        return result === true ? { mbExists: true } : null;
+        return result === true ? { mbExistsSoc: true } : null;
       }
     );
   };
@@ -15,7 +15,7 @@ export function existsMbSoc(socSrv: SocioService, socID: number): AsyncValidator
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: '[mbExists][ngModel]',
+  selector: '[mbExistsSoc][ngModel]',
   providers: [
     {
       provide: NG_ASYNC_VALIDATORS,
