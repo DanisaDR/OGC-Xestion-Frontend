@@ -87,7 +87,6 @@ export class FormSocioComponent implements OnInit {
   }
 
   update(): void {
-    console.log('paso por el update?: ' + this.socio.socDataBaixa);
     this.socSrv.update(this.socio).subscribe(
       json => {
         this.alertSrv.updateSocSwal(json.message);

@@ -3,59 +3,68 @@
 
   <div class="card-body">
     <form class="row" #actForm="ngForm">
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <label for="actNom" class="col-form-label col-sm-3">NOME *</label>
-          <div class="col-sm-9">
-            <input id="actNom" class="form-control" name="actNom" placeholder="Ex: Gaitas"  type="text" [(ngModel)]="actividade.actNom" minlength="5" maxlength="45" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #actNom="ngModel" />
-            <div class="alert alert-danger" *ngIf="actNom.invalid && (actNom.dirty || actNom.touched)">
-              <div *ngIf="actNom?.errors.required">Non se olvide de cubrilo nome da actividade</div>
-              <div *ngIf="actNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</div>
-              <div *ngIf="actNom?.errors.maxlength || actNom?.errors.maxlength">O nome debe estar entre 5 e 45</div>
+      <div class="col-lg-12 col-md-12">
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="actNom" class="col-form-label">NOME</mat-label>
+          <input type="text" matInput name="actNom" placeholder="Ex: Gaitas" [(ngModel)]="actividade.actNom" required minlength="4" maxlength="80" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" #actNom="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="actNom.invalid && (actNom.dirty || actNom.touched)">
+            <mat-error *ngIf="actNom?.errors.required">Non se olvide de cubrilo nome da actividade</mat-error>
+            <mat-error *ngIf="actNom?.errors.pattern">O nome soamente pode levar carácteres, no caso de número, cubra co 'i' mayus. Ex: III (3)</mat-error>
+            <mat-error *ngIf="actNom?.errors.maxlength || actNom?.errors.maxlength">O nome debe estar entre 5 e 45</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="actDescr" class="col-form-label">DESCRICIÓN</mat-label>
+          <input type="text" matInput name="actDescr" placeholder="Ex: Describe a actividade" [(ngModel)]="actividade.actDescr" minlength="4" maxlength="150" #actDescr="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="actDescr.invalid && (actDescr.dirty || actDescr.touched)">
+            <mat-error *ngIf="actDescr?.errors.required">Non se olvide de cubrilo nome da actividade</mat-error>
+            <mat-error *ngIf="actDescr?.errors.maxlength || actDescr?.errors.maxlength">O nome debe estar entre 4 e 150</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group col-lg-4 col-md-4">
+          <mat-label for="actAport" class="col-form-label">APORTACIÓN</mat-label>
+          <input type="number" matInput name="actAport" required placeholder="Ex: 20.00" [(ngModel)]="actividade.actAport" min="10" max="40" #actAport="ngModel">
+          <mat-error class="alert alert-danger" *ngIf="actAport.invalid && (actAport.dirty || actAport.touched)">
+            <mat-error *ngIf="actAport?.errors.required">Non se olvide de cubrilo nome da actividade</mat-error>
+            <mat-error *ngIf="actAport?.errors.max || actAport?.errors.max">A aportación debe estar entre 10 e 40 euros</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <br><br>
+        <div class="row">
+          <div class="form-group col-lg-6 col-md-6">
+            <mat-form-field>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerComezo" [value]="actividade.actDataComezo" [(ngModel)]="actividade.actDataComezo" name="actDataComezo" placeholder="Escolla data comezo">
+              <mat-datepicker-toggle matSuffix [for]="pickerComezo"></mat-datepicker-toggle>
+              <mat-datepicker #pickerComezo></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group col-lg-6 col-md-6">
+            <mat-form-field>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerRemate" [value]="actividade.actDataRemate" [(ngModel)]="actividade.actDataRemate" name="actDataRemate" placeholder="Escolla data remate">
+              <mat-datepicker-toggle matSuffix [for]="pickerRemate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerRemate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+          <div class="form-group col-lg-6 col-md-6">
+            <div class="col-sm-12">
+              <ng-select [compareWith]="compareWith" [(ngModel)]="actividade.usuario" required placerholder="escolla monitor/a" name="usuarioSelected">
+                <ng-option type="checkbox" *ngFor="let usu of usuarios" [value]="usu">
+                  {{ usu.usuNom }} {{ usu.usuApe1 }} {{ usu.usuApe2 }}
+                </ng-option>
+              </ng-select>
             </div>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <label for="actDescr" class="col-form-label col-sm-3">DESCRICIÓN *</label>
-          <div class="col-sm-9">
-            <input id="actDescr" class="form-control" name="actDescr" placeholder="Ex: Gaitas"  type="text" [(ngModel)]="actividade.actDescr" minlength="5" maxlength="45" required #actDescr="ngModel" />
-            <div class="alert alert-danger" *ngIf="actDescr.invalid && (actDescr.dirty || actDescr.touched)">
-              <div *ngIf="actDescr?.errors.required">Non se olvide de cubrilo nome da actividade</div>
-              <div *ngIf="actDescr?.errors.maxlength || actDescr?.errors.maxlength">O nome debe estar entre 5 e 45</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="actAport" class="col-form-label col-sm-3">APORTACIÓN *</label>
-          <div class="col-sm-9">
-            <input id="actAport" class="form-control" name="actAport" type="number" placeholder="Ex: 15" [(ngModel)]="actividade.actAport" min="10" max="40" maxlength="2" minlength="2" #actAport="ngModel" />
-            <div class="alert alert-danger" *ngIf="actAport.invalid && (actAport.dirty || actAport.touched)">
-              <div *ngIf="actAport?.errors.min || actAport?.errors.max">Recorde entre 10 e 40 Euros</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6 col-md-6">
-        <div class="form-group row">
-          <em class="text-info">Pode engadir monitor/a para actividade [permite un/ha so/a]</em>
-          <label for="rol" class="col-form-label col-sm-3">MONITOR/A *</label>
-          <div class="col-lg-12 col-sm-12">
-            <ng-select [(ngModel)]="actividade.usuario" placerholder="escolla monitor/a para actividade" name="usuarioSelected">
-              <ng-option type="checkbox" *ngFor="let usu of usuarios" [value]="usu">
-                {{ usu.usuAlias }}
-              </ng-option>
-            </ng-select>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <em class="text-info">Pode engadir as actividades onde vai a ser monitor/a [permite escoller varias]</em>
-          <label for="socio" class="col-form-label col-sm-3">SOCIOS/AS *</label>
-          <div class="col-lg-12 col-sm-12">
-            <ng-select [(ngModel)]="actividade.socios" [multiple]="true" placerholder="escolla socios/as para actividade" name="sociosSelected">
+          <div class="form-group col-lg-6 col-md-6">
+            <ng-select [(ngModel)]="actividade.socios" [multiple]="true" placerholder="escolla socios/as" name="sociosSelected">
               <ng-option type="checkbox" *ngFor="let soc of socios" [value]="soc">
                 {{ soc.socNomComp }}
               </ng-option>
@@ -64,12 +73,14 @@
         </div>
       </div>
 
-      <div class="form-group row text-right">
-        <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/actividades/paxina/0']">VOLTAR</button>
-        <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!actividade.actID else elseBlock" [disabled]="!actForm.form.valid">CREAR</button>
-        <ng-template #elseBlock>
-          <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!actForm.form.valid">EDITAR</button>
-        </ng-template>
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <button class="btn btn-sm btn-primary mr-3" role="button" [routerLink]="['/actividades/paxina/0']">VOLTAR</button>
+          <button class="btn btn-sm btn-primary" role="button" (click)="create()" *ngIf="!actividade.actID else elseBlock" [disabled]="!actForm.form.valid">CREAR</button>
+          <ng-template #elseBlock>
+            <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!actForm.form.valid">EDITAR</button>
+          </ng-template>
+        </div>
       </div>
     </form>
   </div>

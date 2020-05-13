@@ -11,6 +11,7 @@ import { ListRolComponent } from './components/rol/list/list-rol.component';
 import { ListSocioComponent } from './components/socio/list/list-socio.component';
 import { FormRolComponent } from './components/rol/form/form-rol.component';
 import { FormSocioComponent } from './components/socio/form/form-socio.component';
+import { FormActividadeComponent } from './components/actividade/form/form-actividade.component';
 
 
 const routes: Routes = [
@@ -90,6 +91,18 @@ const routes: Routes = [
   {
     path: 'actividades/paxina/:paxina/atopar',
     component: ListActividadeComponent,
+    canActivate: [AuthGuard, PermisoGuard],
+    data: { permisos: ['TODOS_PERMISOS', 'VER_USUARIOS'] }
+  },
+  {
+    path: 'actividades/form',
+    component: FormActividadeComponent,
+    canActivate: [AuthGuard, PermisoGuard],
+    data: { permisos: ['TODOS_PERMISOS', 'VER_USUARIOS'] }
+  },
+  {
+    path: 'actividades/form/:actID',
+    component: FormActividadeComponent,
     canActivate: [AuthGuard, PermisoGuard],
     data: { permisos: ['TODOS_PERMISOS', 'VER_USUARIOS'] }
   },

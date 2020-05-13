@@ -52,6 +52,7 @@ import { MAT_DATE_LOCALE,
 import { ValidatorMbUsuarioDirective } from './validators/validator-mb-usuario.directive';
 import { ValidatorEmailSocioDirective } from './validators/validator-email-socio.directive';
 import { ValidatorMbSocioDirective } from './validators/validator-mb-socio.directive';
+import { FormActividadeComponent } from './components/actividade/form/form-actividade.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ValidatorMbSocioDirective } from './validators/validator-mb-socio.direc
     PaginatorComponent,
     ListActividadeComponent,
     FinderActividadeComponent,
+    FormActividadeComponent,
     ListRolComponent,
     FormRolComponent,
     ListSocioComponent,

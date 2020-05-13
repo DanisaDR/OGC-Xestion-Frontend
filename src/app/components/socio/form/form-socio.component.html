@@ -58,7 +58,7 @@
 
         <mat-form-field class="form-group col-lg-6 col-md-6">
           <mat-label for="socCP" class="col-form-label">CÓDIGO POSTAL</mat-label>
-          <input type="number" matInput name="socCP" placeholder="Ex: 15009" [(ngModel)]="socio.socCP" minlength="5" maxlength="5" required #socCP="ngModel">
+          <input type="number" matInput name="socCP" placeholder="Ex: 15009" [(ngModel)]="socio.socCP" min="15000" max="15999" required #socCP="ngModel">
           <mat-error class="alert alert-danger" *ngIf="socCP.invalid && (socCP.dirty || socCP.touched)">
             <mat-error *ngIf="socCP?.errors.min || socCP?.errors.max">Recorde entre 15000 e 15999</mat-error>
           </mat-error>

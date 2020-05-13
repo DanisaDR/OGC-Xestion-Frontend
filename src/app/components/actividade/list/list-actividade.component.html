@@ -1,6 +1,6 @@
 <div class="mx-auto container">
   <div class="text-primary">
-    <h5 class="text-center text-dark">LISTADO ACTIVDADES [Tamén pode xestionar o/a monitor/a e socios/as apuntados/as]</h5>
+    <h3 class="text-center text-dark">LISTADO ACTIVDADES</h3>
 
     <div class="col-lg-12">
       <div class="row mb-2 mt-2">
@@ -39,10 +39,6 @@
                 </th>
 
                 <th scope="col">
-                  Descrición
-                </th>
-
-                <th scope="col">
                   Data Comezo
                 </th>
 
@@ -71,9 +67,8 @@
               <tr *ngFor="let activ of actividades" scope="row">
                 <td>{{ activ.actID }}</td>
                 <td>{{ activ.actNom }}</td>
-                <td>{{ activ.actDescr }}</td>
-                <td>{{ activ.actDataComezo }}</td>
-                <td>{{ activ.actDataRemate }}</td>
+                <td>{{ activ.actDataComezo | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ activ.actDataRemate | date: 'dd/MM/yyyy' }}</td>
 
                 <td>
                   <div *ngIf="activ.socios.length == 0 else modalActiv">
