@@ -93,7 +93,6 @@ export class FormActividadeComponent implements OnInit {
   }
 
   update(): void {
-    console.log(this.actividade.usuario);
     this.actSrv.update(this.actividade).subscribe(
       json => {
         this.alertSrv.updateActSwal(json.message);

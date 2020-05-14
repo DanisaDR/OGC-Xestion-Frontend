@@ -1,8 +1,17 @@
-<form class="mb-3 row">
-  <div class="col-lg-10">
-    <label>Nome:</label>
-    <input type="text" class="form-control" value="" placeholder="nome" [(ngModel)]="searchActNom" name="searchActNom" #selectSearchActNom="ngModel">
-    <button class="btn btn-sm btn-rounded btn-info" type="reset" (click)="applyReset()">LIMPAR</button>
-    <button class="btn btn-sm btn-rounded btn-info" type="button" id="button" type="reset" (click)="applyFilter()" [routerLink]="['/actividades/paxina/0']">ATOPAR</button>
+<form class="mb-3">
+  <div class="row">
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchActNom" class="col-form-label">NOME</mat-label>
+      <input type="text" matInput value="" placeholder="Ex: Gaitas" [(ngModel)]="searchActNom" name="searchActNom" #selectSearchActNom="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="form-group col-lg-6 col-md-6">
+      <mat-label for="searchActAport" class="col-form-label">APORTACIÓN</mat-label>
+      <input type="number" matInput value="" placeholder="ex: 20" [(ngModel)]="searchActAport" name="searchActAport" #selectSearchActAport="ngModel">
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <button mat-raised-button color="primary" type="submit" (click)="applyReset()">LIMPAR</button> &nbsp;
+    <button mat-raised-button color="primary" type="button" id="button" type="submit" (click)="applyFilter()">ATOPAR</button>
   </div>
 </form>

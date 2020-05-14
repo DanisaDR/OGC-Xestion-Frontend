@@ -28,6 +28,7 @@ export class ListActividadeComponent implements OnInit {
   filtro: any;
 
   searchActNom = '';
+  searchActAport = 0;
 
   lstSoc: Socio[] = [];
 
@@ -43,20 +44,42 @@ export class ListActividadeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initialLoad();
+  }
+
+  initialLoad() {
     this.activRoute.paramMap.subscribe(params => {
       // tslint:disable-next-line: prefer-const
-      let page: number = +params.get(this.constSrv.pageVariable);
+      this.page = +params.get(this.constSrv.pageVariable);
 
-      if (!page) {
-        page = 0;
+      if (!this.page) {
+        this.page = 0;
       }
 
-      this.actSrv.getFilter(this.searchActNom, page, this.order, this.ordenationType)
-        .subscribe(response => {
-          this.paginator = response;
-          this.actividades = this.paginator.content;
-        });
+      this.actSrv.getFilter(
+        this.searchActNom, this.searchActAport,
+        this.page, this.order, this.ordenationType
+      ).subscribe(response => {
+        this.paginator = response;
+        this.actividades = this.paginator.content;
+      });
     });
+  }
+
+  loadWithParams() {
+    this.activRoute.paramMap.subscribe(params => {
+      const page: number = +params.get(this.constSrv.pageVariable);
+
+      this.actSrv.getFilter(this.searchActNom, this.searchActAport,
+        this.page, this.order, this.ordenationType)
+        .subscribe(
+          response => {
+            this.actividades = response.content as Actividade[];
+            this.paginator = response;
+          }
+        );
+      }
+    );
   }
 
   sortingArrows() {
@@ -64,8 +87,8 @@ export class ListActividadeComponent implements OnInit {
   }
 
   reset() {
-    this.router.navigate([this.constSrv.page0Url]);
     this.searchActNom = '';
+    this.searchActAport = 0;
     this.ngOnInit();
   }
 
@@ -78,18 +101,7 @@ export class ListActividadeComponent implements OnInit {
       this.ordenationType = true;
     }
 
-    this.activRoute.paramMap.subscribe(params => {
-      const page: number = +params.get(this.constSrv.pageVariable);
-
-      this.actSrv.getFilter(this.searchActNom, page, this.order, this.ordenationType)
-        .subscribe(
-          response => {
-            this.actividades = response.content as Actividade[];
-            this.paginator = response;
-          }
-        );
-      }
-    );
+    this.loadWithParams();
   }
 
   getAct(actID: number) {
@@ -102,8 +114,12 @@ export class ListActividadeComponent implements OnInit {
     );
   }
 
-  getFind(searchActNom: string, filtro: any) {
+  getFind(searchActNom: string, searchActAport: number, filtro: any) {
     this.order = filtro;
+    this.page = 0;
+
+    this.searchActNom = searchActNom;
+    this.searchActAport = searchActAport;
 
     if (this.ordenationType) {
       this.ordenationType = false;
@@ -111,17 +127,13 @@ export class ListActividadeComponent implements OnInit {
       this.ordenationType = true;
     }
 
-    this.activRoute.paramMap.subscribe(params => {
-      const page: number = +params.get(this.constSrv.pageVariable);
-
-      this.searchActNom = searchActNom;
-
-      this.actSrv.getFilter(this.searchActNom, page, this.order, this.ordenationType).
-        subscribe(response => {
-          this.actividades = response.content as Actividade[];
-          this.paginator = response;
-        }
-      );
-    });
+    this.actSrv.getFilter(
+      this.searchActNom, this.searchActAport,
+      this.page, this.order, this.ordenationType).
+      subscribe(response => {
+        this.actividades = response.content as Actividade[];
+        this.paginator = response;
+      }
+    );
   }
 }

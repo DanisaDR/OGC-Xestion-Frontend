@@ -5,22 +5,22 @@
     <div class="col-lg-12">
       <div class="row mb-2 mt-2">
         <div class="col-10">
-          <button class="btn btn-sm btn-primary mr-5" type="button"
+          <button mat-raised-button color="primary" type="button"
             title="CREAR ACTIVIDADE" [routerLink]="['/actividades/form']"
-            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR ACTIVIDADE</button>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-outline-light" type="button" data-toggle="collapse"
-            data-target="#collapseActividades" aria-expanded="true" aria-controls="#collapseActividades">
-            <img src="assets/icons/arrow-top.svg" class="mr-1">
-          </button>
+            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR</button>
         </div>
 
-        <div class="collapse show" id="collapseActividades">
-          <div class="col-lg-12 card card-body">
-            <app-finder-actividade></app-finder-actividade>
-          </div>
-        </div>
+        <mat-expansion-panel class="container">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Buscador
+            </mat-panel-title>
+            <mat-panel-description>
+              Podes usalo para buscar actividades
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-finder-actividade></app-finder-actividade>
+        </mat-expansion-panel>
 
         <div class="container">
           <table class="table table-responsive">
