@@ -28,7 +28,7 @@ export class FinderActividadeComponent implements OnInit {
       this.searchActNom = '';
     }
 
-    if (this.searchActAport === undefined || this.searchActAport === null) {
+    if (this.searchActAport === undefined) {
       this.searchActAport = 0;
     }
 

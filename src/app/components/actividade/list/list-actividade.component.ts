@@ -68,7 +68,7 @@ export class ListActividadeComponent implements OnInit {
 
   loadWithParams() {
     this.activRoute.paramMap.subscribe(params => {
-      const page: number = +params.get(this.constSrv.pageVariable);
+      this.page = +params.get(this.constSrv.pageVariable);
 
       this.actSrv.getFilter(this.searchActNom, this.searchActAport,
         this.page, this.order, this.ordenationType)
@@ -89,6 +89,9 @@ export class ListActividadeComponent implements OnInit {
   reset() {
     this.searchActNom = '';
     this.searchActAport = 0;
+    this.ordenationType = true;
+    this.page = 0;
+    this.order = 'actID';
     this.ngOnInit();
   }
 
