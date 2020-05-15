@@ -21,6 +21,7 @@ export class FormActividadeComponent implements OnInit {
   actividade: Actividade = new Actividade();
 
   socios: Socio[] = [];
+  usuarios: Usuario[] = [];
   usuario: Usuario;
 
   editable: boolean;
@@ -56,6 +57,8 @@ export class FormActividadeComponent implements OnInit {
           this.actividade = actividade;
           this.socios = this.actividade.socios;
           this.usuario = this.actividade.usuario;
+          this.actividade.actDataComezo = new Date(actividade.actDataComezo);
+          this.actividade.actDataRemate = new Date(actividade.actDataRemate);
         }, err => {
           this.errors = err.error.errors.messages as string[];
           this.alertSrv.errorsSwal(this.errors);
@@ -63,27 +66,26 @@ export class FormActividadeComponent implements OnInit {
         });
       }
 
-      this.usuSrv.getUsu(this.usuario.usuID).subscribe(usuario => {
-        this.usuario = usuario;
+      this.usuSrv.getUsuList().subscribe(usuarios => {
+        this.usuarios = usuarios;
       }, err => {
-        this.errors = this.errors = err.error.errors.messages as string[];
+        this.errors = this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
       });
 
       this.socSrv.getSocList().subscribe(socios => {
         this.socios = socios;
       }, err => {
-        this.errors = this.errors = err.error.errors.messages as string[];
+        this.errors = this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
       });
     });
   }
 
   create(): void {
-    this.actividade.socios = this.sociosSelected;
     this.actSrv.create(this.actividade).subscribe(json => {
       this.alertSrv.createActSwal(json.message);
-      this.router.navigate([this.constSrv.userUrl]);
+      this.router.navigate([this.constSrv.activUrl]);
     }, err => {
       this.errors = err.error.errors as string[];
       this.alertSrv.errorsSwal(this.errors);
@@ -100,5 +102,9 @@ export class FormActividadeComponent implements OnInit {
         this.alertSrv.errorsSwal(this.errors);
       }
     );
+  }
+
+  compareWith(usuario, usuarioSelected) {
+    return usuario.usuID === usuarioSelected.usuID;
   }
 }

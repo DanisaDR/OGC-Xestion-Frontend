@@ -87,6 +87,15 @@ export class SocioService {
     );
   }
 
+  delete(socID: number) {
+    return this.http.put<Socio>(
+      this.constSrv.socCompleteUrl +
+      this.constSrv.leavingUrl +
+      socID,
+      { headers: this.httpHeaders }
+    );
+  }
+
   async checkEmailSoc(email: string, socID: number): Promise<boolean> {
     if (email === undefined || email === null || email === '') {
       email = '';

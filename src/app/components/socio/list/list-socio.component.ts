@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantsService } from 'src/app/services/constants.service';
 import { SweetAlertService } from 'src/app/services/sweetalert.service';
 import { LoginService } from 'src/app/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-socio',
@@ -148,6 +149,48 @@ export class ListSocioComponent implements OnInit {
         this.paginator = response;
       }
     );
+  }
+
+  delete(socio: Socio): void {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: true
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: `Estás seguro de desexa eliminar ${socio.socNomComp}`,
+      text: `O/A socio/a: ${socio.socNomComp} será dado de baixa!`,
+      icon: 'warning',
+      showCancelButton: true,
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.socSrv.delete(socio.socID).subscribe(response => {
+          this.socios = this.socios.filter(lib => lib !== socio);
+
+          swalWithBootstrapButtons.fire(`O/A socio/a: ${socio.socNomComp} será dado de baixa con exito!`);
+
+          this.socSrv.getFilter(
+            this.searchSocNomComp, this.searchSocEnder, this.searchSocTfnoFx,
+            this.searchSocTfnoMb, this.searchSocEmail,
+            this.page, this.order, this.ordenationType
+          // tslint:disable-next-line: no-shadowed-variable
+          ).subscribe(response => {
+            this.paginator = response;
+            this.socios = this.paginator.content;
+          });
+
+          if (this.socios.length === 0) {
+            this.page = this.page - 1;
+            this.router.navigate([this.constSrv.socCompletePagUrl]);
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire();
+      }
+    });
   }
 
   refreshListAct(lstActSoc: Actividade[]) {

@@ -10,9 +10,11 @@ import { Actividade } from 'src/app/models/actividade';
 export class FinderActividadeComponent implements OnInit {
 
   actividades: Actividade[];
-
   paginator: any;
+
   searchActNom: string;
+  searchActAport: number;
+
   filtro: any;
 
   constructor(private actComp: ListActividadeComponent) { }
@@ -26,11 +28,17 @@ export class FinderActividadeComponent implements OnInit {
       this.searchActNom = '';
     }
 
-    this.actComp.getFind(this.searchActNom, this.filtro);
+    if (this.searchActAport === undefined || this.searchActAport === null) {
+      this.searchActAport = 0;
+    }
+
+    this.actComp.getFind(this.searchActNom,
+      this.searchActAport, this.filtro);
   }
 
   applyReset() {
     this.searchActNom = '';
+    this.searchActAport = 0;
     this.actComp.reset();
   }
 }

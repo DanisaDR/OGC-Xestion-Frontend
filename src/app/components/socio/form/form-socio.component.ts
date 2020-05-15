@@ -57,7 +57,15 @@ export class FormSocioComponent implements OnInit {
         this.socSrv.getSoc(socID).subscribe(socio => {
           this.socio = socio;
           this.socio.socDataAlta = new Date(socio.socDataAlta);
-          this.socio.socDataBaixa = new Date(socio.socDataBaixa);
+
+          if (socio.socDataBaixa === null) {
+            this.socio.socDataBaixa = null;
+          } else if (socio.socDataBaixa.toString() !== '1900-01-01T00:00:00.000+0100') {
+            this.socio.socDataBaixa = new Date(socio.socDataBaixa);
+          } else {
+            this.socio.socDataBaixa = null;
+          }
+
           this.actividades = this.socio.actividades;
         }, err => {
           console.log(err.error);
@@ -87,7 +95,6 @@ export class FormSocioComponent implements OnInit {
   }
 
   update(): void {
-    console.log('paso por el update?: ' + this.socio.socDataBaixa);
     this.socSrv.update(this.socio).subscribe(
       json => {
         this.alertSrv.updateSocSwal(json.message);

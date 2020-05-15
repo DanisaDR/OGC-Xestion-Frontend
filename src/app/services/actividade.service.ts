@@ -40,7 +40,8 @@ export class ActividadeService {
     );
   }
 
-  getFilter(searchActNom: string, page: number, order: any, ordenationType: any): Observable<any> {
+  getFilter(searchActNom: string, searchActAport: number,
+            page: number, order: any, ordenationType: any): Observable<any> {
 
     if (order === undefined) {
       order = 'actID';
@@ -53,7 +54,8 @@ export class ActividadeService {
     const parameters = new HttpParams()
       .set('order', order)
       .append('ordenationType', ordenationType)
-      .append('searchActNom', searchActNom);
+      .append('searchActNom', searchActNom)
+      .append('searchActAport', searchActAport.toString());
 
     return this.http.get(
       this.constSrv.activCompleteUrl +
@@ -73,8 +75,9 @@ export class ActividadeService {
   }
 
   update(actividade: Actividade): Observable<any> {
+    console.log(actividade);
     return this.http.put<any>(
-      this.constSrv.userCompleteUrl +
+      this.constSrv.activCompleteUrl +
       this.constSrv.updateUrl +
       actividade.actID,
       actividade,

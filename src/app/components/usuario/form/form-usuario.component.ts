@@ -20,6 +20,7 @@ export class FormUsuarioComponent implements OnInit {
 
   usuarios: Usuario[] = [];
   usuario: Usuario = new Usuario();
+
   roles: Rol[] = [];
   actividades: Actividade[] = [];
   login: Login = new Login();
