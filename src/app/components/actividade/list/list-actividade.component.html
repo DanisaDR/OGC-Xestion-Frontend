@@ -1,6 +1,6 @@
 <div class="mx-auto container">
   <div class="text-primary">
-    <h3 class="text-center text-dark">LISTADO ACTIVDADES</h3>
+    <h3 class="text-center text-dark">LISTADO ACTIVIDADES</h3>
 
     <div class="col-lg-12">
       <div class="row mb-2 mt-2">
@@ -27,15 +27,15 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col" (click)="getOrdenation('actID')" (click)="sortingArrows()" [routerLink]="['/actividades/paxina/0']">
-                  # ID
-                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
-                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                  ID
+                  <i-bs class="ordeacion" name="chevron-up" *ngIf="!this.visible"></i-bs>
+                  <i-bs class="ordeacion" name="chevron-down" *ngIf="this.visible"></i-bs>
                 </th>
 
                 <th scope="col" (click)="getOrdenation('actNom')" (click)="sortingArrows()" [routerLink]="['/actividades/paxina/0']">
                   Nome
-                  <img src="assets/icons/caret-top.svg" alt="desc" *ngIf="!visible">
-                  <img src="assets/icons/caret-bottom.svg" alt="asc" *ngIf="visible">
+                  <i-bs class="ordeacion" name="chevron-up" *ngIf="!this.visible"></i-bs>
+                  <i-bs class="ordeacion" name="chevron-down" *ngIf="this.visible"></i-bs>
                 </th>
 
                 <th scope="col">
@@ -106,7 +106,7 @@
                 <td>{{ activ.actAport }},00 € / mes</td>
 
                 <td>
-                  <a [routerLink]="['/actividades/form/', activ.actID]" class="btn btn-sm btn-warning">EDITAR</a>
+                  <button class="btn btn-sm btn-warning" title="editar actividade" [routerLink]="['/actividades/form/', activ.actID]">EDITAR</button>
                 </td>
                 <td>
                   <a [routerLink]="['/actividades/borrar/', activ.actID]" class="btn btn-sm btn-danger">BORRAR</a>

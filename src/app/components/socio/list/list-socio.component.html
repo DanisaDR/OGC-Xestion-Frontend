@@ -7,7 +7,7 @@
         <div class="col-10">
           <button mat-raised-button color="primary" type="button"
             title="CREAR SOCIO/A" [routerLink]="['/socios/form']"
-            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR SOCIO/A</button>
+            *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')">CREAR</button>
         </div>
 
         <mat-expansion-panel class="container">
@@ -69,8 +69,8 @@
                 <td>{{ socio.socNomComp }}</td>
 
                 <td class="text-center">
-                  <i-bs class="verde estados" name="person-check-fill" *ngIf="!socio.socAct"></i-bs>
-                  <i-bs class="vermello estados" name="person-dash-fill" *ngIf="socio.socAct"></i-bs>
+                  <i-bs class="verde estados" name="person-check-fill" *ngIf="socio.socAct"></i-bs>
+                  <i-bs class="vermello estados" name="person-dash-fill" *ngIf="!socio.socAct"></i-bs>
                 </td>
 
                 <td>
@@ -147,7 +147,7 @@
                   <button class="btn btn-sm btn-warning" title="editar socio/a" [routerLink]="['/socios/form/', socio.socID]">EDITAR</button>
                 </td>
                 <td>
-                  <a [routerLink]="['/socios/borrar/', socio.socID]" class="btn btn-sm btn-danger">BORRAR</a>
+                  <button *ngIf="socio.socAct" class="btn btn-sm btn-danger" title="baixa socio/a" (click)="delete(socio)">BORRAR</button>
                 </td>
               </tr>
             </tbody>

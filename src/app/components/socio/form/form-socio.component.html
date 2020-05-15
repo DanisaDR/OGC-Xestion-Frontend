@@ -77,7 +77,7 @@
 
         <mat-form-field class="form-group col-lg-4 col-md-4">
           <mat-label for="socTfnoMb" class="col-form-label">TELÉFONO MÓBIL</mat-label>
-          <input type="text" [socWithID]="socio.socID" mbExistsSoc matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" minlength="9" maxlength="9" pattern="^[0-9]$" #socTfnoMb="ngModel">
+          <input type="text" [socWithID]="socio.socID" mbExistsSoc matInput name="socTfnoMb" placeholder="Ex: 600000000" [(ngModel)]="socio.socTfnoMb" minlength="9" maxlength="9" pattern="^[6|7]{1}[\d]{8}$" #socTfnoMb="ngModel">
           <mat-error class="alert alert-danger" *ngIf="socTfnoMb.invalid && (socTfnoMb.dirty || socTfnoMb.touched)">
             <mat-error *ngIf="socTfnoMb?.errors.pattern">Patrón non recoñecido para un móbil</mat-error>
             <mat-error *ngIf="socTfnoMb?.errors.minlength || socTfnoMb?.errors.maxlength">Recorde entre 600000000 e 699999999</mat-error>
@@ -104,24 +104,25 @@
             </div>
             <ng-template #hasDateRegister>
               <mat-form-field>
-                <input matInput [min]="minDate" [max]="maxDate" [value]="socio.socDataAlta" [matDatepicker]="pickerAlta" [(ngModel)]="socio.socDataAlta" name="socDataAlta" disabled>
+                <input matInput [value]="socio.socDataAlta" [matDatepicker]="pickerAlta" [(ngModel)]="socio.socDataAlta" name="socDataAlta" disabled>
                 <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
                 <mat-datepicker #pickerAlta></mat-datepicker>
+                <mat-error>A data ten mal formato ou algún erró</mat-error>
               </mat-form-field>
             </ng-template>
           </div>
 
           <div class="form-group col-lg-4 col-md-4">
             <mat-form-field>
-              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerBaixa" [value]="socio.socDataBaixa" [(ngModel)]="socio.socDataBaixa" name="socDataBaixa" placeholder="Escolla data">
+              <input matInput [matDatepicker]="pickerBaixa" [value]="socio.socDataBaixa" [(ngModel)]="socio.socDataBaixa" name="socDataBaixa" placeholder="Escolla data">
               <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
               <mat-datepicker #pickerBaixa></mat-datepicker>
+              <mat-error>A data ten mal formato ou algún erró</mat-error>
             </mat-form-field>
           </div>
 
-          <div class="form-group">
-            <em class="text-info">Pode engadir as actividades as que se pode apuntar [permite escoller varias]</em>
-            <label for="actividades" class="col-form-label col-sm-3">ACTIVIDADES</label>
+          <div class="form-group col-lg-12 col-md-12">
+            <label for="actividades" class="col-form-label">ENGADIR ACTIVIDADE/S</label>
             <div class="col-lg-12 col-sm-12">
               <ng-select [(ngModel)]="socio.actividades" [multiple]="true" placerholder="escolla actividades" name="actividadesSelected">
                 <ng-option type="checkbox" *ngFor="let act of actividades" [value]="act">
@@ -140,7 +141,7 @@
           <button class="btn btn-sm btn-primary" role="button" (click)="update()" [disabled]="!socForm.form.valid">EDITAR</button>
         </ng-template>
       </div>
-      <pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>
+      <!--<pre class="col-lg-12 col-sm-12"><code>{{ getAllErrors(socForm.form) | json }}</code></pre>-->
     </form>
   </div>
 </div>

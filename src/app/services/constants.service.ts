@@ -25,6 +25,7 @@ export class ConstantsService {
   readonly deleteUrl = '/borrar/';
   readonly pageUrl = '/paxina/';
   readonly page0Url = '/paxina/0';
+  readonly leavingUrl = '/baixa/';
 
   // Variables a usar para non hardcodear nada.
   readonly loginVariable = 'login';
