@@ -103,6 +103,7 @@
               <em><b>Data da alta non atopada e non se pode establecer</b></em>
             </div>
             <ng-template #hasDateRegister>
+
               <mat-form-field>
                 <input matInput [value]="socio.socDataAlta" [matDatepicker]="pickerAlta" [(ngModel)]="socio.socDataAlta" name="socDataAlta" disabled>
                 <mat-datepicker-toggle matSuffix [for]="pickerAlta"></mat-datepicker-toggle>
@@ -114,7 +115,7 @@
 
           <div class="form-group col-lg-4 col-md-4">
             <mat-form-field>
-              <input matInput [matDatepicker]="pickerBaixa" [value]="socio.socDataBaixa" [(ngModel)]="socio.socDataBaixa" name="socDataBaixa" placeholder="Escolla data">
+              <input matInput [matDatepicker]="pickerBaixa" [min]="socio.socDataAlta" [value]="socio.socDataBaixa" [(ngModel)]="socio.socDataBaixa" name="socDataBaixa" placeholder="Escolla data">
               <mat-datepicker-toggle matSuffix [for]="pickerBaixa"></mat-datepicker-toggle>
               <mat-datepicker #pickerBaixa></mat-datepicker>
               <mat-error>A data ten mal formato ou algún erró</mat-error>

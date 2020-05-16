@@ -75,6 +75,8 @@ export class FormSocioComponent implements OnInit {
         });
       }
 
+      this.socio.socDataAlta = new Date();
+
       this.actSrv.getActList().subscribe(actividades => {
         this.actividades = actividades;
       }, err => {
