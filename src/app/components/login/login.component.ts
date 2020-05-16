@@ -42,20 +42,17 @@ export class LoginComponent implements OnInit {
       response => {
         this.loginSrv.saveToken(response.access_token);
         this.loginSrv.saveUser(response.access_token);
-
-        const usu = this.loginSrv.login.usuAlias;
-
         this.router.navigate([this.constSrv.homeUrl]);
       }, err => {
         if (err.status === 401) {
           this.sweetSrv.error401();
           return;
         } else if (err.status === 400) {
-          this.sweetSrv.error400();
-          this.loginSrv.attempLogin(this.login.usuID).subscribe(int => {
-            this.attempts = int;
+          this.loginSrv.attempLogin(this.login.usuAlias).subscribe(int => {
+              this.attempts = int;
             }
           );
+          this.sweetSrv.error400();
         }
 
         if (this.attempts === 0) {

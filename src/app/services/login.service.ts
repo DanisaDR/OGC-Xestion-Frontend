@@ -122,10 +122,10 @@ export class LoginService {
     localStorage.clear();
   }
 
-  attempLogin(usuID: number): Observable<number> {
+  attempLogin(usuAlias: string): Observable<number> {
     return this.http.post<number>(
-      this.constSrv.trySession + 
-      usuID, 
+      this.constSrv.trySession +
+      usuAlias,
       { headers: this.httpHeaders }
     );
   }

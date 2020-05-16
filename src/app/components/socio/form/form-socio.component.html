@@ -319,6 +319,7 @@
                             </em>
                         </div>
                         <ng-template #hasDateRegister>
+                            <mat-label class="col-form-label">ALTA &nbsp;&nbsp;</mat-label>
                             <mat-form-field>
                                 <input
                                     matInput
@@ -340,15 +341,17 @@
 
 
                     <div class="form-group col-lg-4 col-md-4">
+                        <mat-label class="col-form-label">BAIXA &nbsp;&nbsp;</mat-label>
                         <mat-form-field>
                             <input
                                 matInput
                                 [matDatepicker]="pickerBaixa"
                                 [min]="socio.socDataAlta"
+                                [max]="dateNow"
                                 [value]="socio.socDataBaixa"
                                 [(ngModel)]="socio.socDataBaixa"
                                 name="socDataBaixa"
-                                placeholder="Escolla data"
+                                placeholder="dd/mm/aaaa"
                                 [disabled]="socio.socID == null"
                             >
                             <mat-datepicker-toggle

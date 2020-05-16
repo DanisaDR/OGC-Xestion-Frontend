@@ -22,8 +22,8 @@ export class FormSocioComponent implements OnInit {
   cotas: Cota[] = [];
   actividades: Actividade[] = [];
 
-  public dateValue: Date = new Date(0);
-
+  dateValue: Date = new Date(0);
+  dateNow: Date = new Date();
   editable: boolean;
   errors: string[];
 
@@ -71,7 +71,6 @@ export class FormSocioComponent implements OnInit {
             this.actividades = this.socio.actividades;
           },
           (err) => {
-            console.log(err.error);
             this.errors = err.error.errors as string[];
             this.alertSrv.errorsSwal(this.errors);
             return this.router.navigate([this.constSrv.socUrl]);

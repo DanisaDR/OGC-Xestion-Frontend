@@ -75,7 +75,6 @@ export class ActividadeService {
   }
 
   update(actividade: Actividade): Observable<any> {
-    console.log(actividade);
     return this.http.put<any>(
       this.constSrv.activCompleteUrl +
       this.constSrv.updateUrl +

@@ -46,7 +46,8 @@ import { MAT_DATE_LOCALE,
    MatFormFieldModule,
    MatCardModule,
    MatExpansionModule,
-   MatButtonModule
+   MatButtonModule,
+   MatSlideToggleModule
 } from '@angular/material';
 
 import { ValidatorMbUsuarioDirective } from './validators/validator-mb-usuario.directive';
@@ -91,7 +92,8 @@ import { FormActividadeComponent } from './components/actividade/form/form-activ
     MatCardModule,
     MatExpansionModule,
     NgxBootstrapIconsModule.pick(allIcons),
-    MatButtonModule
+    MatButtonModule,
+    MatSlideToggleModule
   ],
   providers: [
     InicioService,
