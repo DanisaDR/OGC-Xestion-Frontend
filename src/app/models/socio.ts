@@ -4,8 +4,8 @@ import { Cota } from './cota';
 export class Socio {
   socID: number;
   socNom: string;
-  soc1Ape: string;
-  soc2Ape: string;
+  socApe1: string;
+  socApe2: string;
   socNomComp: string;
   socEnder: string;
   socPob: string;

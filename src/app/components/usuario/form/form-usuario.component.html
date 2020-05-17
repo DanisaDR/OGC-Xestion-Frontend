@@ -91,6 +91,8 @@
             </ng-select>
           </div>
         </div>
+        {{ usuario.login.usuEstado }}
+        <mat-slide-toggle [checked]="usuario.login.usuEstado == true ? true : false" (change)="changedStatus(usuario.login.usuEstado)"></mat-slide-toggle>
       </div>
 
       <div class="form-group row text-right">

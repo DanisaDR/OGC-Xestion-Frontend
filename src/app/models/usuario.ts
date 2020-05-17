@@ -15,8 +15,7 @@ export class Usuario {
   usuClave: string;
 
   roles: Rol[] = [];
-
   actividades: Actividade[] = [];
-
   permisos: Permiso[] = [];
+  login: Login = new Login();
 }

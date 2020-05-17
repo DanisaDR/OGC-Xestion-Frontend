@@ -106,4 +106,8 @@ export class FormUsuarioComponent implements OnInit {
       }
     );
   }
+
+  changedStatus(usuEstado: boolean) {
+    this.usuario.login.usuEstado = usuEstado ? false : true;
+  }
 }

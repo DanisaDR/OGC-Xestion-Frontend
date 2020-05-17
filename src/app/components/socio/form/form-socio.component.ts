@@ -14,17 +14,16 @@ import { FormArray, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-form-socio',
   templateUrl: './form-socio.component.html',
-  styleUrls: ['./form-socio.component.css']
+  styleUrls: ['./form-socio.component.css'],
 })
 export class FormSocioComponent implements OnInit {
-
   socios: Socio[] = [];
   socio: Socio = new Socio();
   cotas: Cota[] = [];
   actividades: Actividade[] = [];
 
-  public dateValue: Date = new Date (0);
-
+  dateValue: Date = new Date(0);
+  dateNow: Date = new Date();
   editable: boolean;
   errors: string[];
 
@@ -50,77 +49,93 @@ export class FormSocioComponent implements OnInit {
   }
 
   loadSocio(): void {
-    this.activRoute.params.subscribe(params => {
+    this.activRoute.params.subscribe((params) => {
       const socID = params.socID;
 
       if (socID) {
-        this.socSrv.getSoc(socID).subscribe(socio => {
-          this.socio = socio;
-          this.socio.socDataAlta = new Date(socio.socDataAlta);
+        this.socSrv.getSoc(socID).subscribe(
+          (socio) => {
+            this.socio = socio;
+            this.socio.socDataAlta = new Date(socio.socDataAlta);
 
-          if (socio.socDataBaixa === null) {
-            this.socio.socDataBaixa = null;
-          } else if (socio.socDataBaixa.toString() !== '1900-01-01T00:00:00.000+0100') {
-            this.socio.socDataBaixa = new Date(socio.socDataBaixa);
-          } else {
-            this.socio.socDataBaixa = null;
+            if (socio.socDataBaixa === null) {
+              this.socio.socDataBaixa = null;
+            } else if (
+              socio.socDataBaixa.toString() !== '1900-01-01T00:00:00.000+0100'
+            ) {
+              this.socio.socDataBaixa = new Date(socio.socDataBaixa);
+            } else {
+              this.socio.socDataBaixa = null;
+            }
+
+            this.actividades = this.socio.actividades;
+          },
+          (err) => {
+            this.errors = err.error.errors as string[];
+            this.alertSrv.errorsSwal(this.errors);
+            return this.router.navigate([this.constSrv.socUrl]);
           }
-
-          this.actividades = this.socio.actividades;
-        }, err => {
-          console.log(err.error);
-          this.errors = err.error.errors as string[];
-          this.alertSrv.errorsSwal(this.errors);
-          return this.router.navigate([this.constSrv.socUrl]);
-        });
+        );
       }
 
       this.socio.socDataAlta = new Date();
 
-      this.actSrv.getActList().subscribe(actividades => {
-        this.actividades = actividades;
-      }, err => {
-        this.errors = this.errors = err.error.errors as string[];
-        this.alertSrv.errorsSwal(this.errors);
-      });
+      this.actSrv.getActList().subscribe(
+        (actividades) => {
+          this.actividades = actividades;
+        },
+        (err) => {
+          this.errors = this.errors = err.error.errors as string[];
+          this.alertSrv.errorsSwal(this.errors);
+        }
+      );
     });
   }
 
   create(): void {
-    this.socSrv.create(this.socio).subscribe(json => {
-      this.alertSrv.createSocSwal(json.message);
-      this.router.navigate([this.constSrv.socUrl]);
-    }, err => {
-      this.errors = err.error.errors as string[];
-      this.alertSrv.errorsSwal(this.errors);
-    });
-  }
-
-  update(): void {
-    this.socSrv.update(this.socio).subscribe(
-      json => {
-        this.alertSrv.updateSocSwal(json.message);
+    this.socio.socNomComp = this.socio.socApe2.concat(' ')
+                              .concat(this.socio.socApe1)
+                              .concat(', ')
+                              .concat(this.socio.socNom);
+    this.socSrv.create(this.socio).subscribe(
+      (json) => {
+        this.alertSrv.createSocSwal(json.message);
         this.router.navigate([this.constSrv.socUrl]);
-      }, err => {
+      },
+      (err) => {
         this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
       }
     );
   }
 
-  getAllErrors(form: FormGroup | FormArray): { [key: string]: any; } | null {
+  update(): void {
+    this.socSrv.update(this.socio).subscribe(
+      (json) => {
+        this.alertSrv.updateSocSwal(json.message);
+        this.router.navigate([this.constSrv.socUrl]);
+      },
+      (err) => {
+        this.errors = err.error.errors as string[];
+        this.alertSrv.errorsSwal(this.errors);
+      }
+    );
+  }
+
+  getAllErrors(form: FormGroup | FormArray): { [key: string]: any } | null {
     let hasError = false;
     const result = Object.keys(form.controls).reduce((acc, key) => {
-        const control = form.get(key);
-        const errors = (control instanceof FormGroup || control instanceof FormArray)
-            ? this.getAllErrors(control)
-            : control.errors;
-        if (errors) {
-            acc[key] = errors;
-            hasError = true;
-        }
-        return acc;
-      }, {} as { [key: string]: any; });
+      const control = form.get(key);
+      const errors =
+        control instanceof FormGroup || control instanceof FormArray
+          ? this.getAllErrors(control)
+          : control.errors;
+      if (errors) {
+        acc[key] = errors;
+        hasError = true;
+      }
+      return acc;
+    }, {} as { [key: string]: any });
     return hasError ? result : null;
   }
 }

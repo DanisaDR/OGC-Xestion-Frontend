@@ -31,7 +31,8 @@
               "src/assets/js/jquery-3.4.1.slim.min.js",
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
-              "src/assets/js/my-script.js"
+              "src/assets/js/my-script.js",
+              "src/assets/js/hammer.min.js"
             ]
           },
           "configurations": {
