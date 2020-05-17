@@ -14,17 +14,17 @@
 
       <br/><br/>
 
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label for="usuClave" class="col-form-label">CLAVE</mat-label>
-        <input [type]="show ? 'text': 'password'" required type="text" matInput name="usuClave" placeholder="Ex: nomapeape" [(ngModel)]="login.usuClave" minlength="5" maxlength="50" #usuClave="ngModel">
+        <input [type]="hide ? 'password': 'text'" required type="text" matInput name="usuClave" placeholder="Ex: nomapeape" [(ngModel)]="login.usuClave" minlength="5" maxlength="50" #usuClave="ngModel">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-error class="alert alert-danger" *ngIf="usuClave.invalid && (usuClave.dirty || usuClave.touched)">
           <mat-error *ngIf="usuClave?.errors.required">A contrasinal é requerido e non pode estar baleira</mat-error>
         </mat-error>
-        <button type="button" class="btn btn-sm mt" (click)="contrasinal()">
-          <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para agochar a contrasinal" title="agochar contrasinal" *ngIf="!visible">
-          <img class="eye-icon" src="assets/icons/eye.svg" alt="pulsa para amosar a contrasinal" title="amosar contrasinal" *ngIf="visible">
-        </button>
       </mat-form-field>
+
 
       <br/><br/>
 

@@ -363,8 +363,38 @@
                         </mat-form-field>
                     </div>
 
+                    <div class="form-group col-lg-4 col-md-4">
+                      <mat-form-field class="form-group col-lg-6 col-md-6">
+                        <mat-label
+                            for="cotaAnual"
+                            class="col-form-label"
+                        >
+                            COTA ANUAL {{ socio.cotas[socio.cotas.length-1].cotaAnual }}
+                        </mat-label>
+                        <input
+                            type="number"
+                            matInput
+                            name="cotaImporte"
+                            placeholder="Ex: 15"
+                            min="0"
+                            max="15"
+                            [(ngModel)]="socio.cotas[socio.cotas.length-1].cotaImporte"
+                            pattern="[0-9]+"
+                            #cotaImporte="ngModel"
+                        >
+                        <mat-error
+                            class="alert alert-danger"
+                            *ngIf="socEmail.invalid && (socEmail.dirty || socEmail.touched)"
+                        >
+                            <mat-error *ngIf="socEmail?.errors.min || socEmail?.errors.max">
+                                As cotas deben por estar entre 0 e 15.
+                            </mat-error>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
 
-                    <div class="form-group col-lg-12 col-md-12">
+
+                    <div class="form-group col-lg-6 col-md-6">
                         <label
                             for="actividades"
                             class="col-form-label"

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   attempts: number;
 
   show: boolean;
-  visible = false;
+  hide = true;
 
   constructor(
     private loginSrv: LoginService,
@@ -30,11 +30,6 @@ export class LoginComponent implements OnInit {
     if (this.loginSrv.isAuthenticated()) {
       this.router.navigate([this.constSrv.homeUrl]);
     }
-  }
-
-  contrasinal() {
-    this.show = !this.show;
-    this.visible = !this.visible;
   }
 
   logon(): void {
