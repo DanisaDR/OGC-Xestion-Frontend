@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Cota } from 'src/app/models/cota';
-import { Socio } from 'src/app/models/socio';
-import { Actividade } from 'src/app/models/actividade';
-import { SocioService } from 'src/app/services/socio.service';
-import { CotaService } from 'src/app/services/cota.service';
-import { ActividadeService } from 'src/app/services/actividade.service';
-import { LoginService } from 'src/app/services/login.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SweetAlertService } from 'src/app/services/sweetalert.service';
-import { ConstantsService } from 'src/app/services/constants.service';
-import { FormArray, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Cota} from 'src/app/models/cota';
+import {Socio} from 'src/app/models/socio';
+import {Actividade} from 'src/app/models/actividade';
+import {SocioService} from 'src/app/services/socio.service';
+import {CotaService} from 'src/app/services/cota.service';
+import {ActividadeService} from 'src/app/services/actividade.service';
+import {LoginService} from 'src/app/services/login.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SweetAlertService} from 'src/app/services/sweetalert.service';
+import {ConstantsService} from 'src/app/services/constants.service';
+import {FormArray, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-form-socio',
@@ -21,6 +21,7 @@ export class FormSocioComponent implements OnInit {
   socio: Socio = new Socio();
   cotas: Cota[] = [];
   actividades: Actividade[] = [];
+  cota = new Cota();
 
   dateValue: Date = new Date(0);
   dateNow: Date = new Date();
@@ -41,8 +42,8 @@ export class FormSocioComponent implements OnInit {
     private activRoute: ActivatedRoute,
     private router: Router,
     private alertSrv: SweetAlertService,
-    private constSrv: ConstantsService
-  ) { }
+    private constSrv: ConstantsService,
+  ) {}
 
   ngOnInit() {
     this.loadSocio();
@@ -74,8 +75,13 @@ export class FormSocioComponent implements OnInit {
             this.errors = err.error.errors as string[];
             this.alertSrv.errorsSwal(this.errors);
             return this.router.navigate([this.constSrv.socUrl]);
-          }
+          },
         );
+      } else {
+        this.socio.cotas = [];
+        this.cota.cotaImporte = 0;
+        this.cota.cotaAnual = new Date().getFullYear();
+        this.socio.cotas.push(this.cota);
       }
 
       this.socio.socDataAlta = new Date();
@@ -87,16 +93,17 @@ export class FormSocioComponent implements OnInit {
         (err) => {
           this.errors = this.errors = err.error.errors as string[];
           this.alertSrv.errorsSwal(this.errors);
-        }
+        },
       );
     });
   }
 
   create(): void {
-    this.socio.socNomComp = this.socio.socApe2.concat(' ')
-                              .concat(this.socio.socApe1)
-                              .concat(', ')
-                              .concat(this.socio.socNom);
+    this.socio.socNomComp = this.socio.socApe2
+      .concat(' ')
+      .concat(this.socio.socApe1)
+      .concat(', ')
+      .concat(this.socio.socNom);
     this.socSrv.create(this.socio).subscribe(
       (json) => {
         this.alertSrv.createSocSwal(json.message);
@@ -105,7 +112,7 @@ export class FormSocioComponent implements OnInit {
       (err) => {
         this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
-      }
+      },
     );
   }
 
@@ -118,11 +125,11 @@ export class FormSocioComponent implements OnInit {
       (err) => {
         this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
-      }
+      },
     );
   }
 
-  getAllErrors(form: FormGroup | FormArray): { [key: string]: any } | null {
+  getAllErrors(form: FormGroup | FormArray): {[key: string]: any} | null {
     let hasError = false;
     const result = Object.keys(form.controls).reduce((acc, key) => {
       const control = form.get(key);
@@ -135,7 +142,7 @@ export class FormSocioComponent implements OnInit {
         hasError = true;
       }
       return acc;
-    }, {} as { [key: string]: any });
+    }, {} as {[key: string]: any});
     return hasError ? result : null;
   }
 }
