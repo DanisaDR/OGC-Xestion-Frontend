@@ -1,32 +1,38 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { ConstantsService } from './constants.service';
-import { LoginService } from './login.service';
-import { Login } from '../models/login';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {LoginService} from './login.service';
+import {Login} from '../models/login';
+import {ConstantsService} from './constants.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InicioService {
-
   params = new HttpParams();
 
   login: Login;
 
-  private httpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json;charset=utf-8'
-  });
+  headers = new HttpHeaders();
 
   constructor(
-    private http: HttpClient,
     private constSrv: ConstantsService,
-    private loginSrv: LoginService
-  ) { }
+    private loginSrv: LoginService,
+    private httpClient: HttpClient,
+  ) {
+    this.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    this.headers.set('Access-Control-Allow-Methods', 'GET');
+    this.headers.set('Access-Control-Allow-Origin', '*');
+  }
 
   getInicio() {
-    return this.http.get(
-      this.constSrv.inicio,
-      { headers: this.httpHeaders }
-    );
+    return this.httpClient.get(this.constSrv.inicio, {
+      headers: this.headers,
+    });
+  }
+
+  getRRSSRedeoza() {
+    return this.httpClient.get(this.constSrv.blogueRRSS, {
+      headers: this.headers,
+    });
   }
 }

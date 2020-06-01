@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConstantsService {
-
   // Establece a Url para comunicación co Backend en Spring Boot + Security + Token JWT
   hostname = 'http://' + location.hostname + ':8080';
   // hostname = 'http://192.168.1.111:8080/xestion';
@@ -64,7 +63,7 @@ export class ConstantsService {
   readonly usuValidMb = this.hostname + this.userUrl + '/existe-mb/';
   readonly socValidEmail = this.hostname + this.socUrl + '/existe-email/';
   readonly socValidMb = this.hostname + this.socUrl + '/existe-mb/';
+  readonly blogueRRSS = 'https://www.redeoza.org/rrss/blogue';
 
-  constructor() { }
-
+  constructor() {}
 }
