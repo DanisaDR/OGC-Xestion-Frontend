@@ -4,6 +4,7 @@ import {Usuario} from 'src/app/models/usuario';
 import {LoginService} from 'src/app/services/login.service';
 import {UsuarioService} from 'src/app/services/usuario.service';
 import {InicioService} from 'src/app/services/inicio.service';
+import {Blogue} from 'src/app/models/blogue';
 
 @Component({
   selector: 'app-inicio',
@@ -12,7 +13,7 @@ import {InicioService} from 'src/app/services/inicio.service';
 })
 export class InicioComponent implements OnInit {
   usuario: Usuario = new Usuario();
-  blogue: any = [];
+  listBlogue: Blogue[] = [];
 
   constructor(
     private loginSrv: LoginService,
@@ -33,8 +34,8 @@ export class InicioComponent implements OnInit {
       });
     }
 
-    this.inicioSrv.getRRSSRedeoza().subscribe((blg) => {
-      this.blogue = blg;
+    this.inicioSrv.getRRSSRedeoza().subscribe((blg: Blogue[]) => {
+      this.listBlogue = blg;
     });
   }
 }

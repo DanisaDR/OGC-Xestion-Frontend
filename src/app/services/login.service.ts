@@ -1,32 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Login } from '../models/login';
-import { ConstantsService } from './constants.service';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {Login} from '../models/login';
+import {ConstantsService} from './constants.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   // tslint:disable-next-line: variable-name
   private _login: Login;
 
   // tslint:disable-next-line: variable-name
   private _token: string;
 
-  httpHeaders: HttpHeaders | { [header: string]: string | string[]; };
+  httpHeaders: HttpHeaders | {[header: string]: string | string[]};
 
-  constructor(private http: HttpClient,
-              private constSrv: ConstantsService) {
-
-  }
+  constructor(private http: HttpClient, private constSrv: ConstantsService) {}
 
   get login(): Login {
     if (this._login != null) {
       return this._login;
-    } else if (this._login == null && localStorage.getItem(this.constSrv.loginVariable) != null) {
-      this._login = JSON.parse(localStorage.getItem(this.constSrv.loginVariable)) as Login;
+    } else if (
+      this._login == null &&
+      sessionStorage.getItem(this.constSrv.loginVariable) != null
+    ) {
+      this._login = JSON.parse(
+        sessionStorage.getItem(this.constSrv.loginVariable),
+      ) as Login;
     }
 
     return new Login();
@@ -35,8 +36,11 @@ export class LoginService {
   get token(): string {
     if (this._token != null) {
       return this._token;
-    } else if (this._token == null && localStorage.getItem(this.constSrv.tokenVariable) != null) {
-      this._token = localStorage.getItem(this.constSrv.tokenVariable);
+    } else if (
+      this._token == null &&
+      sessionStorage.getItem(this.constSrv.tokenVariable) != null
+    ) {
+      this._token = sessionStorage.getItem(this.constSrv.tokenVariable);
     }
 
     return null;
@@ -47,9 +51,10 @@ export class LoginService {
 
     const credentials = btoa(this.constSrv.appName + this.constSrv.passwordApp);
 
-    const httpHeaders = new HttpHeaders(
-      { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', Authorization: 'Basic ' + credentials }
-    );
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      Authorization: 'Basic ' + credentials,
+    });
 
     const params = new URLSearchParams();
 
@@ -57,7 +62,9 @@ export class LoginService {
     params.set('username', login.usuAlias);
     params.set('password', login.usuClave);
 
-    return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
+    return this.http.post<any>(urlEndpoint, params.toString(), {
+      headers: httpHeaders,
+    });
   }
 
   saveUser(accessToken: string): void {
@@ -70,12 +77,15 @@ export class LoginService {
     this._login.roles = payload.authorities;
     this._login.permisos = payload.authorities;
 
-    localStorage.setItem(this.constSrv.loginVariable, JSON.stringify(this._login));
+    sessionStorage.setItem(
+      this.constSrv.loginVariable,
+      JSON.stringify(this._login),
+    );
   }
 
   saveToken(accessToken: string): void {
     this._token = accessToken;
-    localStorage.setItem(this.constSrv.tokenVariable, accessToken);
+    sessionStorage.setItem(this.constSrv.tokenVariable, accessToken);
   }
 
   getDataToken(accessToken: string): any {
@@ -117,24 +127,20 @@ export class LoginService {
   logout() {
     this._login = null;
     this._token = null;
-    localStorage.removeItem(this.constSrv.loginVariable);
-    localStorage.removeItem(this.constSrv.tokenVariable);
-    localStorage.clear();
+    sessionStorage.removeItem(this.constSrv.loginVariable);
+    sessionStorage.removeItem(this.constSrv.tokenVariable);
+    sessionStorage.clear();
   }
 
   attempLogin(usuAlias: string): Observable<number> {
-    return this.http.post<number>(
-      this.constSrv.trySession +
-      usuAlias,
-      { headers: this.httpHeaders }
-    );
+    return this.http.post<number>(this.constSrv.trySession + usuAlias, {
+      headers: this.httpHeaders,
+    });
   }
 
   getLoginByUsuID(usuID: number) {
-    return this.http.get<Login>(
-      this.constSrv.findUsuAlias +
-      usuID,
-      { headers: this.httpHeaders }
-    );
+    return this.http.get<Login>(this.constSrv.findUsuAlias + usuID, {
+      headers: this.httpHeaders,
+    });
   }
 }
