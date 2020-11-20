@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import { Rol } from 'src/app/models/Rol';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConstantsService } from 'src/app/services/constants.service';
-import { SweetAlertService } from 'src/app/services/sweetalert.service';
+import {Component, OnInit} from '@angular/core';
+import {Usuario} from 'src/app/models/usuario';
+import {Rol} from 'src/app/models/Rol';
+import {UsuarioService} from 'src/app/services/usuario.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ConstantsService} from 'src/app/services/constants.service';
+import {SweetAlertService} from 'src/app/services/sweetalert.service';
 import Swal from 'sweetalert2';
-import { LoginService } from 'src/app/services/login.service';
-import { Actividade } from 'src/app/models/actividade';
+import {LoginService} from 'src/app/services/login.service';
+import {Actividade} from 'src/app/models/actividade';
 
 @Component({
   selector: 'app-list-usuario',
   templateUrl: './list-usuario.component.html',
-  styleUrls: ['./list-usuario.component.css']
+  styleUrls: ['./list-usuario.component.css'],
 })
 export class ListUsuarioComponent implements OnInit {
-
   usuarios: Usuario[] = [];
   usuario: Usuario;
   errors: string[];
@@ -29,8 +28,8 @@ export class ListUsuarioComponent implements OnInit {
   filtro: any;
 
   searchUsuNom = '';
-  searchUsuApe1 = '';
-  searchUsuApe2 = '';
+  searchusu1Ape = '';
+  searchusu2Ape = '';
   searchUsuEnder = '';
   searchUsuTfnoFx = '';
   searchUsuTfnoMb = '';
@@ -44,15 +43,15 @@ export class ListUsuarioComponent implements OnInit {
     private constSrv: ConstantsService,
     private router: Router,
     private sweetSrv: SweetAlertService,
-    private loginSrv: LoginService
-  ) { }
+    public loginSrv: LoginService,
+  ) {}
 
   ngOnInit() {
     this.initialLoad();
   }
 
   initialLoad() {
-    this.activRoute.paramMap.subscribe(params => {
+    this.activRoute.paramMap.subscribe((params) => {
       // tslint:disable-next-line: prefer-const
       this.page = +params.get(this.constSrv.pageVariable);
 
@@ -60,31 +59,45 @@ export class ListUsuarioComponent implements OnInit {
         this.page = 0;
       }
 
-      this.usuSrv.getFilter(
-        this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-        this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-        this.page, this.order, this.ordenationType
-      ).subscribe(response => {
-        this.paginator = response;
-        this.usuarios = this.paginator.content;
-      });
+      this.usuSrv
+        .getFilter(
+          this.searchUsuNom,
+          this.searchusu1Ape,
+          this.searchusu2Ape,
+          this.searchUsuEnder,
+          this.searchUsuTfnoFx,
+          this.searchUsuTfnoMb,
+          this.page,
+          this.order,
+          this.ordenationType,
+        )
+        .subscribe((response) => {
+          this.paginator = response;
+          this.usuarios = this.paginator.content;
+        });
     });
   }
 
   loadWithParams() {
-    this.activRoute.paramMap.subscribe(params => {
+    this.activRoute.paramMap.subscribe((params) => {
       this.page = +params.get(this.constSrv.pageVariable);
 
-      this.usuSrv.getFilter(
-        this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-        this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-        this.page, this.order, this.ordenationType
-      ).subscribe(
-        response => {
+      this.usuSrv
+        .getFilter(
+          this.searchUsuNom,
+          this.searchusu1Ape,
+          this.searchusu2Ape,
+          this.searchUsuEnder,
+          this.searchUsuTfnoFx,
+          this.searchUsuTfnoMb,
+          this.page,
+          this.order,
+          this.ordenationType,
+        )
+        .subscribe((response) => {
           this.usuarios = response.content as Usuario[];
           this.paginator = response;
-        }
-      );
+        });
     });
   }
 
@@ -94,8 +107,8 @@ export class ListUsuarioComponent implements OnInit {
 
   reset() {
     this.searchUsuNom = '';
-    this.searchUsuApe1 = '';
-    this.searchUsuApe2 = '';
+    this.searchusu1Ape = '';
+    this.searchusu2Ape = '';
     this.searchUsuEnder = '';
     this.searchUsuTfnoFx = '';
     this.searchUsuTfnoMb = '';
@@ -120,82 +133,112 @@ export class ListUsuarioComponent implements OnInit {
 
   getUser(usuID: number) {
     return this.usuSrv.getUsu(usuID).subscribe(
-      response => {
+      (response) => {
         this.usuario = response;
-      }, err => {
+      },
+      (err) => {
         this.sweetSrv.errorsSwal(err);
-      }
+      },
     );
   }
 
-  getFind(searchUsuNom: string, searchUsuApe1: string, searchUsuApe2: string,
-          searchUsuEnder: string, searchUsuTfnoFx: string, searchUsuTfnoMb: string, filtro: any) {
-      this.order = filtro;
-      this.page = 0;
+  getFind(
+    searchUsuNom: string,
+    searchusu1Ape: string,
+    searchusu2Ape: string,
+    searchUsuEnder: string,
+    searchUsuTfnoFx: string,
+    searchUsuTfnoMb: string,
+    filtro: any,
+  ) {
+    this.order = filtro;
+    this.page = 0;
 
-      this.searchUsuNom = searchUsuNom;
-      this.searchUsuApe1 = searchUsuApe1;
-      this.searchUsuApe2 = searchUsuApe2;
-      this.searchUsuEnder = searchUsuEnder;
-      this.searchUsuTfnoFx = searchUsuTfnoFx;
-      this.searchUsuTfnoMb = searchUsuTfnoMb;
+    this.searchUsuNom = searchUsuNom;
+    this.searchusu1Ape = searchusu1Ape;
+    this.searchusu2Ape = searchusu2Ape;
+    this.searchUsuEnder = searchUsuEnder;
+    this.searchUsuTfnoFx = searchUsuTfnoFx;
+    this.searchUsuTfnoMb = searchUsuTfnoMb;
 
-      if (this.ordenationType) {
-        this.ordenationType = false;
-      } else {
-        this.ordenationType = true;
-      }
+    if (this.ordenationType) {
+      this.ordenationType = false;
+    } else {
+      this.ordenationType = true;
+    }
 
-      this.usuSrv.getFilter(
-        this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-        this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-        this.page, this.order, this.ordenationType).subscribe(response => {
-          this.usuarios = response.content as Usuario[];
-          this.paginator = response;
-        }
-      );
+    this.usuSrv
+      .getFilter(
+        this.searchUsuNom,
+        this.searchusu1Ape,
+        this.searchusu2Ape,
+        this.searchUsuEnder,
+        this.searchUsuTfnoFx,
+        this.searchUsuTfnoMb,
+        this.page,
+        this.order,
+        this.ordenationType,
+      )
+      .subscribe((response) => {
+        this.usuarios = response.content as Usuario[];
+        this.paginator = response;
+      });
   }
 
   delete(usuario: Usuario): void {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        cancelButton: 'btn btn-danger'
+        cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: true
+      buttonsStyling: true,
     });
 
-    swalWithBootstrapButtons.fire({
-      title: `Estás seguro de desexa eliminar ${usuario.usuAlias}`,
-      text: `O/A usuario/a co alias: ${usuario.usuAlias} será eliminado!`,
-      icon: 'warning',
-      showCancelButton: true,
-      reverseButtons: true
-    }).then(result => {
-      if (result.value) {
-        this.usuSrv.delete(usuario.usuID).subscribe(response => {
-          this.usuarios = this.usuarios.filter(lib => lib !== usuario);
+    swalWithBootstrapButtons
+      .fire({
+        title: `Estás seguro de desexa eliminar ${usuario.usuAlias}`,
+        text: `O/A usuario/a co alias: ${usuario.usuAlias} será eliminado!`,
+        icon: 'warning',
+        showCancelButton: true,
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.value) {
+          this.usuSrv.delete(usuario.usuID).subscribe((response) => {
+            this.usuarios = this.usuarios.filter((lib) => lib !== usuario);
 
-          swalWithBootstrapButtons.fire(`O/A usuario/a co ${usuario.usuAlias} eliminouse con exito`);
+            swalWithBootstrapButtons.fire(
+              `O/A usuario/a co ${usuario.usuAlias} eliminouse con exito`,
+            );
 
-          this.usuSrv.getFilter(
-            this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-            this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-            // tslint:disable-next-line: no-shadowed-variable
-            this.page, this.order, this.ordenationType).subscribe(response => {
-              this.paginator = response;
-              this.usuarios = this.paginator.content;
+            this.usuSrv
+              .getFilter(
+                this.searchUsuNom,
+                this.searchusu1Ape,
+                this.searchusu2Ape,
+                this.searchUsuEnder,
+                this.searchUsuTfnoFx,
+                this.searchUsuTfnoMb,
+                // tslint:disable-next-line: no-shadowed-variable
+                this.page,
+                this.order,
+                this.ordenationType,
+              )
+              .subscribe((response) => {
+                this.paginator = response;
+                this.usuarios = this.paginator.content;
+              });
+
+            if (this.usuarios.length === 0) {
+              this.page = this.page - 1;
+              this.router.navigate([
+                this.constSrv.userCompletePagUrl + this.page,
+              ]);
             }
-          );
-
-          if (this.usuarios.length === 0) {
-            this.page = this.page - 1;
-            this.router.navigate([this.constSrv.userCompletePagUrl + this.page]);
-          }
-        });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithBootstrapButtons.fire();
-      }
-    });
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire();
+        }
+      });
   }
 
   refreshListRoles(listUsuRoles: Rol[]) {

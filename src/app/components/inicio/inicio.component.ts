@@ -16,7 +16,7 @@ export class InicioComponent implements OnInit {
   listBlogue: Blogue[] = [];
 
   constructor(
-    private loginSrv: LoginService,
+    public loginSrv: LoginService,
     private inicioSrv: InicioService,
     private usuSrv: UsuarioService,
   ) {}

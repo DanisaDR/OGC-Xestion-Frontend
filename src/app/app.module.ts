@@ -5,7 +5,11 @@ import {
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {CommonModule} from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  LocationStrategy,
+} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';

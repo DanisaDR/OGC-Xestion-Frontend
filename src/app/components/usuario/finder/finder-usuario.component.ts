@@ -1,41 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import { ListUsuarioComponent } from '../list/list-usuario.component';
+import {Component, OnInit} from '@angular/core';
+import {Usuario} from 'src/app/models/usuario';
+import {ListUsuarioComponent} from '../list/list-usuario.component';
 
 @Component({
   selector: 'app-finder-usuario',
   templateUrl: './finder-usuario.component.html',
-  styleUrls: ['./finder-usuario.component.css']
+  styleUrls: ['./finder-usuario.component.css'],
 })
 export class FinderUsuarioComponent implements OnInit {
-
   usuarios: Usuario[];
 
   paginator: any;
   searchUsuNom: string;
-  searchUsuApe1: string;
-  searchUsuApe2: string;
+  searchusu1Ape: string;
+  searchusu2Ape: string;
   searchUsuEnder: string;
   searchUsuTfnoFx: string;
   searchUsuTfnoMb: string;
   filtro: any;
 
-  constructor(private usuComp: ListUsuarioComponent) { }
+  constructor(private usuComp: ListUsuarioComponent) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   applyFilter() {
     if (this.searchUsuNom === undefined || this.searchUsuNom === null) {
       this.searchUsuNom = '';
     }
 
-    if (this.searchUsuApe1 === undefined || this.searchUsuApe1 === null) {
-      this.searchUsuApe1 = '';
+    if (this.searchusu1Ape === undefined || this.searchusu1Ape === null) {
+      this.searchusu1Ape = '';
     }
 
-    if (this.searchUsuApe2 === undefined || this.searchUsuApe2 === null) {
-      this.searchUsuApe2 = '';
+    if (this.searchusu2Ape === undefined || this.searchusu2Ape === null) {
+      this.searchusu2Ape = '';
     }
 
     if (this.searchUsuEnder === undefined || this.searchUsuEnder === null) {
@@ -50,15 +48,21 @@ export class FinderUsuarioComponent implements OnInit {
       this.searchUsuTfnoMb = '';
     }
 
-    this.usuComp.getFind(this.searchUsuNom, this.searchUsuApe1, this.searchUsuApe2,
-                        this.searchUsuEnder, this.searchUsuTfnoFx, this.searchUsuTfnoMb,
-                        this.filtro);
+    this.usuComp.getFind(
+      this.searchUsuNom,
+      this.searchusu1Ape,
+      this.searchusu2Ape,
+      this.searchUsuEnder,
+      this.searchUsuTfnoFx,
+      this.searchUsuTfnoMb,
+      this.filtro,
+    );
   }
 
   applyReset() {
     this.searchUsuNom = '';
-    this.searchUsuApe1 = '';
-    this.searchUsuApe2 = '';
+    this.searchusu1Ape = '';
+    this.searchusu2Ape = '';
     this.searchUsuEnder = '';
     this.searchUsuTfnoFx = '';
     this.searchUsuTfnoMb = '';

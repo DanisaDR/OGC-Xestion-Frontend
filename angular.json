@@ -6,14 +6,14 @@
     "OGC-Xestion-Frontend": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
+      "root": "xestion",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/OGC-Xestion-Frontend",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -55,13 +55,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "15mb",
+                  "maximumError": "30mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "50kb",
+                  "maximumError": "80kb"
                 }
               ]
             }

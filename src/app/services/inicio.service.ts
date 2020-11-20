@@ -16,7 +16,7 @@ export class InicioService {
 
   constructor(
     private constSrv: ConstantsService,
-    private loginSrv: LoginService,
+    public loginSrv: LoginService,
     private httpClient: HttpClient,
   ) {
     this.headers.set('Access-Control-Allow-Headers', 'Content-Type');

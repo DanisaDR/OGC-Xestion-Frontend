@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { ActividadeService } from 'src/app/services/actividade.service';
-import { Actividade } from 'src/app/models/actividade';
-import { Socio } from 'src/app/models/socio';
-import { Usuario } from 'src/app/models/usuario';
-import { SocioService } from 'src/app/services/socio.service';
-import { LoginService } from 'src/app/services/login.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SweetAlertService } from 'src/app/services/sweetalert.service';
-import { ConstantsService } from 'src/app/services/constants.service';
+import {Component, OnInit} from '@angular/core';
+import {ActividadeService} from 'src/app/services/actividade.service';
+import {Actividade} from 'src/app/models/actividade';
+import {Socio} from 'src/app/models/socio';
+import {Usuario} from 'src/app/models/usuario';
+import {SocioService} from 'src/app/services/socio.service';
+import {LoginService} from 'src/app/services/login.service';
+import {UsuarioService} from 'src/app/services/usuario.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SweetAlertService} from 'src/app/services/sweetalert.service';
+import {ConstantsService} from 'src/app/services/constants.service';
 
 @Component({
   selector: 'app-form-actividade',
   templateUrl: './form-actividade.component.html',
-  styleUrls: ['./form-actividade.component.css']
+  styleUrls: ['./form-actividade.component.css'],
 })
 export class FormActividadeComponent implements OnInit {
-
   actividades: Actividade[] = [];
   actividade: Actividade = new Actividade();
 
   socios: Socio[] = [];
   usuarios: Usuario[] = [];
   usuario: Usuario;
+
+  minDate: any;
+  maxDate: any;
 
   editable: boolean;
   errors: string[];
@@ -37,70 +39,83 @@ export class FormActividadeComponent implements OnInit {
     private actSrv: ActividadeService,
     private socSrv: SocioService,
     private usuSrv: UsuarioService,
-    private loginSrv: LoginService,
+    public loginSrv: LoginService,
     private activRoute: ActivatedRoute,
     private router: Router,
     private alertSrv: SweetAlertService,
-    private constSrv: ConstantsService
-  ) { }
+    private constSrv: ConstantsService,
+  ) {}
 
   ngOnInit() {
     this.loadUser();
   }
 
   loadUser(): void {
-    this.activRoute.params.subscribe(params => {
+    this.activRoute.params.subscribe((params) => {
       const actID = params.actID;
 
       if (actID) {
-        this.actSrv.getAct(actID).subscribe(actividade => {
-          this.actividade = actividade;
-          this.socios = this.actividade.socios;
-          this.usuario = this.actividade.usuario;
-          this.actividade.actDataComezo = new Date(actividade.actDataComezo);
-          this.actividade.actDataRemate = new Date(actividade.actDataRemate);
-        }, err => {
-          this.errors = err.error.errors.messages as string[];
-          this.alertSrv.errorsSwal(this.errors);
-          return this.router.navigate([this.constSrv.activUrl]);
-        });
+        this.actSrv.getAct(actID).subscribe(
+          (actividade) => {
+            this.actividade = actividade;
+            this.socios = this.actividade.socios;
+            this.usuario = this.actividade.usuario;
+            this.actividade.actDataComezo = new Date(actividade.actDataComezo);
+            this.actividade.actDataRemate = new Date(actividade.actDataRemate);
+          },
+          (err) => {
+            this.errors = err.error.errors.messages as string[];
+            this.alertSrv.errorsSwal(this.errors);
+            return this.router.navigate([this.constSrv.activUrl]);
+          },
+        );
       }
 
-      this.usuSrv.getUsuList().subscribe(usuarios => {
-        this.usuarios = usuarios;
-      }, err => {
-        this.errors = this.errors = err.error.errors as string[];
-        this.alertSrv.errorsSwal(this.errors);
-      });
+      this.usuSrv.getUsuList().subscribe(
+        (usuarios) => {
+          this.usuarios = usuarios;
+        },
+        (err) => {
+          this.errors = this.errors = err.error.errors as string[];
+          this.alertSrv.errorsSwal(this.errors);
+        },
+      );
 
-      this.socSrv.getSocList().subscribe(socios => {
-        this.socios = socios;
-      }, err => {
-        this.errors = this.errors = err.error.errors as string[];
-        this.alertSrv.errorsSwal(this.errors);
-      });
+      this.socSrv.getSocList().subscribe(
+        (socios) => {
+          this.socios = socios;
+        },
+        (err) => {
+          this.errors = this.errors = err.error.errors as string[];
+          this.alertSrv.errorsSwal(this.errors);
+        },
+      );
     });
   }
 
   create(): void {
-    this.actSrv.create(this.actividade).subscribe(json => {
-      this.alertSrv.createActSwal(json.message);
-      this.router.navigate([this.constSrv.activUrl]);
-    }, err => {
-      this.errors = err.error.errors as string[];
-      this.alertSrv.errorsSwal(this.errors);
-    });
+    this.actSrv.create(this.actividade).subscribe(
+      (json) => {
+        this.alertSrv.createActSwal(json.message);
+        this.router.navigate([this.constSrv.activUrl]);
+      },
+      (err) => {
+        this.errors = err.error.errors as string[];
+        this.alertSrv.errorsSwal(this.errors);
+      },
+    );
   }
 
   update(): void {
     this.actSrv.update(this.actividade).subscribe(
-      json => {
+      (json) => {
         this.alertSrv.updateActSwal(json.message);
         this.router.navigate([this.constSrv.activUrl]);
-      }, err => {
+      },
+      (err) => {
         this.errors = err.error.errors as string[];
         this.alertSrv.errorsSwal(this.errors);
-      }
+      },
     );
   }
 

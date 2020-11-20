@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Login } from 'src/app/models/login';
-import { LoginService } from 'src/app/services/login.service';
-import { Router } from '@angular/router';
-import { ConstantsService } from 'src/app/services/constants.service';
-import { SweetAlertService } from 'src/app/services/sweetalert.service';
+import {Component, OnInit} from '@angular/core';
+import {Login} from 'src/app/models/login';
+import {LoginService} from 'src/app/services/login.service';
+import {Router} from '@angular/router';
+import {ConstantsService} from 'src/app/services/constants.service';
+import {SweetAlertService} from 'src/app/services/sweetalert.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   login: Login = new Login();
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(
-    private loginSrv: LoginService,
+    public loginSrv: LoginService,
     private router: Router,
     private constSrv: ConstantsService,
-    private sweetSrv: SweetAlertService
+    private sweetSrv: SweetAlertService,
   ) {
     this.show = false;
   }
@@ -34,26 +34,26 @@ export class LoginComponent implements OnInit {
 
   logon(): void {
     this.loginSrv.logon(this.login).subscribe(
-      response => {
+      (response) => {
         this.loginSrv.saveToken(response.access_token);
         this.loginSrv.saveUser(response.access_token);
         this.router.navigate([this.constSrv.homeUrl]);
-      }, err => {
+      },
+      (err) => {
         if (err.status === 401) {
           this.sweetSrv.error401();
           return;
         } else if (err.status === 400) {
-          this.loginSrv.attempLogin(this.login.usuAlias).subscribe(int => {
-              this.attempts = int;
-            }
-          );
+          this.loginSrv.attempLogin(this.login.usuAlias).subscribe((int) => {
+            this.attempts = int;
+          });
           this.sweetSrv.error400();
         }
 
         if (this.attempts === 0) {
           this.sweetSrv.accountBlock(this.login.usuAlias);
         }
-      }
+      },
     );
   }
 }

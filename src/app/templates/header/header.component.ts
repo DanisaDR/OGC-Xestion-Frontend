@@ -7,7 +7,9 @@ import {LoginService} from 'src/app/services/login.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private loginSrv: LoginService) {}
+  logout: any;
+
+  constructor(public loginSrv: LoginService) {}
 
   ngOnInit() {}
 }

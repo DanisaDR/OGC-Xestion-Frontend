@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Actividade } from 'src/app/models/actividade';
-import { Socio } from 'src/app/models/socio';
-import { Usuario } from 'src/app/models/usuario';
-import { ActividadeService } from 'src/app/services/actividade.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConstantsService } from 'src/app/services/constants.service';
-import { SweetAlertService } from 'src/app/services/sweetalert.service';
-import { LoginService } from 'src/app/services/login.service';
+import {Component, OnInit} from '@angular/core';
+import {Actividade} from 'src/app/models/actividade';
+import {Socio} from 'src/app/models/socio';
+import {Usuario} from 'src/app/models/usuario';
+import {ActividadeService} from 'src/app/services/actividade.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ConstantsService} from 'src/app/services/constants.service';
+import {SweetAlertService} from 'src/app/services/sweetalert.service';
+import {LoginService} from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-list-actividade',
   templateUrl: './list-actividade.component.html',
-  styleUrls: ['./list-actividade.component.css']
+  styleUrls: ['./list-actividade.component.css'],
 })
 export class ListActividadeComponent implements OnInit {
-
   actividades: Actividade[] = [];
   actividade: Actividade;
   errors: string[];
+
+  refreshListSoc;
 
   paginator: any;
   page: number;
@@ -40,15 +41,15 @@ export class ListActividadeComponent implements OnInit {
     private constSrv: ConstantsService,
     private router: Router,
     private sweetSrv: SweetAlertService,
-    private loginSrv: LoginService
-  ) { }
+    public loginSrv: LoginService,
+  ) {}
 
   ngOnInit() {
     this.initialLoad();
   }
 
   initialLoad() {
-    this.activRoute.paramMap.subscribe(params => {
+    this.activRoute.paramMap.subscribe((params) => {
       // tslint:disable-next-line: prefer-const
       this.page = +params.get(this.constSrv.pageVariable);
 
@@ -56,30 +57,38 @@ export class ListActividadeComponent implements OnInit {
         this.page = 0;
       }
 
-      this.actSrv.getFilter(
-        this.searchActNom, this.searchActAport,
-        this.page, this.order, this.ordenationType
-      ).subscribe(response => {
-        this.paginator = response;
-        this.actividades = this.paginator.content;
-      });
+      this.actSrv
+        .getFilter(
+          this.searchActNom,
+          this.searchActAport,
+          this.page,
+          this.order,
+          this.ordenationType,
+        )
+        .subscribe((response) => {
+          this.paginator = response;
+          this.actividades = this.paginator.content;
+        });
     });
   }
 
   loadWithParams() {
-    this.activRoute.paramMap.subscribe(params => {
+    this.activRoute.paramMap.subscribe((params) => {
       this.page = +params.get(this.constSrv.pageVariable);
 
-      this.actSrv.getFilter(this.searchActNom, this.searchActAport,
-        this.page, this.order, this.ordenationType)
-        .subscribe(
-          response => {
-            this.actividades = response.content as Actividade[];
-            this.paginator = response;
-          }
-        );
-      }
-    );
+      this.actSrv
+        .getFilter(
+          this.searchActNom,
+          this.searchActAport,
+          this.page,
+          this.order,
+          this.ordenationType,
+        )
+        .subscribe((response) => {
+          this.actividades = response.content as Actividade[];
+          this.paginator = response;
+        });
+    });
   }
 
   sortingArrows() {
@@ -109,11 +118,12 @@ export class ListActividadeComponent implements OnInit {
 
   getAct(actID: number) {
     return this.actSrv.getAct(actID).subscribe(
-      response => {
+      (response) => {
         this.actividade = response;
-      }, err => {
+      },
+      (err) => {
         this.sweetSrv.errorsSwal(err);
-      }
+      },
     );
   }
 
@@ -130,13 +140,17 @@ export class ListActividadeComponent implements OnInit {
       this.ordenationType = true;
     }
 
-    this.actSrv.getFilter(
-      this.searchActNom, this.searchActAport,
-      this.page, this.order, this.ordenationType).
-      subscribe(response => {
+    this.actSrv
+      .getFilter(
+        this.searchActNom,
+        this.searchActAport,
+        this.page,
+        this.order,
+        this.ordenationType,
+      )
+      .subscribe((response) => {
         this.actividades = response.content as Actividade[];
         this.paginator = response;
-      }
-    );
+      });
   }
 }

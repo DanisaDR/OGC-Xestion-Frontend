@@ -38,7 +38,7 @@ export class FormSocioComponent implements OnInit {
     private socSrv: SocioService,
     private cotaSrv: CotaService,
     private actSrv: ActividadeService,
-    private loginSrv: LoginService,
+    public loginSrv: LoginService,
     private activRoute: ActivatedRoute,
     private router: Router,
     private alertSrv: SweetAlertService,

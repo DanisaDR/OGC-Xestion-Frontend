@@ -4,9 +4,9 @@ import {Injectable} from '@angular/core';
   providedIn: 'root',
 })
 export class ConstantsService {
-  // Establece a Url para comunicación co Backend en Spring Boot + Security + Token JWT
-  hostname = 'http://192.168.1.111:8080';
-  // hostname = 'http://192.168.1.111:8080/xestion';
+  // Establece a Url para comunicación co Backend en Spring Boot + Security + Token
+  hostname = 'http://' + window.location.hostname + ':8080/xestion';
+  // hostname = '';
   readonly baseAppUrl = this.hostname;
   readonly homeUrl = '/inicio';
   readonly trySession = this.hostname + '/login/intento-sesion/';

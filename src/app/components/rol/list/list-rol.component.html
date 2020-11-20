@@ -1,6 +1,6 @@
 <div class="mx-auto container">
   <div class="text-primary">
-    <h5 class="text-center text-dark">LISTADO ROLES [Tamén xestiona Usuarios/as e Permisos]</h5>
+    <h5 class="text-center text-dark">LISTADO ROLES</h5>
 
     <div class="col-lg-12">
       <div class="row mb-2 mt-2">
@@ -8,27 +8,19 @@
           <table class="table table-responsive">
             <thead class="thead-light">
               <tr>
-                <th scope="col">
-                  # ID
-                </th>
+                <th scope="col">ID</th>
 
-                <th scope="col">
-                  Nome
-                </th>
+                <th scope="col">Nome</th>
 
-                <th scope="col">
-                  Descrición
-                </th>
+                <th scope="col">Descrición</th>
 
-                <th scope="col">
-                  Permisos
-                </th>
+                <th scope="col">Permisos</th>
 
-                <th scope="col">
-                  Usuarios/as
-                </th>
+                <th scope="col">Usuarios/as</th>
 
-                <th *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"></th>
+                <th
+                  *ngIf="loginSrv.login.permisos.includes('TODOS_PERMISOS')"
+                ></th>
               </tr>
             </thead>
 
@@ -39,26 +31,50 @@
                 <td>{{ rol.rolDescr }}</td>
 
                 <td>
-                  <div *ngIf="rol.permisos.length == 1 else modalPermisos">
+                  <div *ngIf="rol.permisos.length == 1; else modalPermisos">
                     <ul *ngFor="let permiso of rol.permisos" scope="row">
                       <li>{{ permiso.permisoNom }}</li>
                     </ul>
                   </div>
                   <ng-template #modalPermisos>
-                    <div data-target="#modalPermisosRol" data-toggle="modal" (click)="refreshListPerm(rol.permisos)"> {{ rol.permisos.length }}
-                      <div class="modal fade" id="modalPermisosRol" tabindex="-1" role="dialog" aria-labelledby="modalPermisosRolTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div
+                      data-target="#modalPermisosRol"
+                      data-toggle="modal"
+                      (click)="refreshListPerm(rol.permisos)"
+                    >
+                      {{ rol.permisos.length }}
+                      <div
+                        class="modal fade"
+                        id="modalPermisosRol"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="modalPermisosRolTitle"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
                           <div class="modal-content">
-
                             <div class="modal-header">
-                              <h3 class="modal-title" id="titulo-modal">Permisos asinados o rol</h3>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                              <h3 class="modal-title" id="titulo-modal">
+                                Permisos asinados o rol {{ rol.rolNome }}
+                              </h3>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="close"
+                              >
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
 
                             <div class="modal-body">
-                              <ul *ngFor="let permiso of lstRolPerm" scope="row">
+                              <ul
+                                *ngFor="let permiso of lstRolPerm"
+                                scope="row"
+                              >
                                 <li>{{ permiso.permisoNom }}</li>
                               </ul>
                             </div>
@@ -70,27 +86,54 @@
                 </td>
 
                 <td>
-                  <div *ngIf="rol.usuarios.length == 1 else modalUsuarios">
+                  <div *ngIf="rol.usuarios.length == 1; else modalUsuarios">
                     <ul *ngFor="let usuario of rol.usuarios" scope="row">
-                      <li>{{ usuario.usuNom }} {{ usuario.usuApe1 }} {{ usuario.usuApe2 }}</li>
+                      <li>
+                        {{ usuario.usuNom }} {{ usuario.usu1Ape }}
+                        {{ usuario.usu2Ape }}
+                      </li>
                     </ul>
                   </div>
                   <ng-template #modalUsuarios>
-                    <div data-target="#modalRolUsuarios" data-toggle="modal" (click)="refreshListUsu(rol.usuarios)"> {{ rol.usuarios.length }}
-                      <div class="modal fade" id="modalRolUsuarios" tabindex="-1" role="dialog" aria-labelledby="modalRolUsuariosTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div
+                      data-target="#modalRolUsuarios"
+                      data-toggle="modal"
+                      (click)="refreshListUsu(rol.usuarios)"
+                    >
+                      {{ rol.usuarios.length }}
+                      <div
+                        class="modal fade"
+                        id="modalRolUsuarios"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="modalRolUsuariosTitle"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
                           <div class="modal-content">
-
                             <div class="modal-header">
-                              <h3 class="modal-title" id="titulo-modal">Usuarios/as asinados o rol</h3>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                              <h3 class="modal-title" id="titulo-modal">
+                                Usuarios/as asinados o rol
+                              </h3>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="close"
+                              >
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
 
                             <div class="modal-body">
                               <ul *ngFor="let usuario of lstRolUsu" scope="row">
-                                <li>{{ usuario.usuNom }} {{ usuario.usuApe1 }} {{ usuario.usuApe2 }}</li>
+                                <li>
+                                  {{ usuario.usuNom }} {{ usuario.usu1Ape }}
+                                  {{ usuario.usu2Ape }}
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -101,7 +144,11 @@
                 </td>
 
                 <td>
-                  <a [routerLink]="['/roles/form/', rol.rolID]" class="btn btn-sm btn-warning">EDITAR</a>
+                  <a
+                    [routerLink]="['/roles/form/', rol.rolID]"
+                    class="btn btn-sm btn-warning"
+                    >EDITAR</a
+                  >
                 </td>
               </tr>
             </tbody>
